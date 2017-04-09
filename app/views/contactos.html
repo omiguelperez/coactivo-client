@@ -1,0 +1,20 @@
+<p>Aqui mostraremos los contactos.</p>
+
+<input type="text" placeholder="nombre" ng-model="nuevo.nombre">
+<input type="text" placeholder="" ng-model="nuevo.telefono">
+<input type="text" placeholder="" ng-model="nuevo.direccion">
+
+<button ng-click="registrar()">Registrar</button>
+
+<table class="table">
+	<thead>
+		<th>Nombre</th>
+		<th>Telefono</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="contacto in Contactos">
+			<td>{{ contacto.nombre }}</td>
+			<td>{{ contacto.telefono }}</td>
+		</tr>
+	</tbody>
+</table>
