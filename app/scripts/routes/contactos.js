@@ -18,5 +18,5 @@ Contacto.config(function($routeProvider) {
 		.when('/secretaria', {
       templateUrl: 'views/Secretaria/index.html',
       controller: ''
-    })
+    })	
 });
