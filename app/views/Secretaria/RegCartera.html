@@ -1,0 +1,133 @@
+<div class="col s10 offset-s1">
+		<div class="card-panel z-depth-2">
+			<h3><span><i class="material-icons medium left">inbox</i><span> Registro de Cartera</h3>
+			<div class="divider"></div>
+			<div class="row">
+				<div class="input-field">
+				<label>Tipo de Persona</label><br>
+				<input type="radio" name="persona" id="radioNatural" value="Natural" ng-model="Nuevo.Tipo_persona" class="with-gap">
+				<label for="radioNatural">Natural</label>
+				<input type="radio" name="persona" id="radioJuridica" value="Juridica" ng-model="Nuevo.Tipo_persona" class="with-gap">
+				<label for="radioJuridica">Juridica</label>
+				</div>	
+			</div>
+			<div class="row">
+			<fieldset> <legend>Datos Personales</legend>
+				<div class="input-field col s2">
+					<select id="cmbTipoId">
+						<option value="1-Cedula">Cedula</option>
+						<option value="2-Cedula Ex">Cedula Ex</option>
+						<option value="3-Pasaporte">Pasaporte</option>
+					</select>
+					<label for="cmbTipoId">Tipo De Documento</label>
+				</div>
+				
+				<div class="input-field col s3">
+					<input type="number" name="identificacion" id="inputidentificacion" ng-model="Nuevo.Documento" class="validate" pattern="[0-9]*">
+					<label for="inputidentificacion" data-error="Sólo Números" data-success="">Numero Documento</label>
+				</div>
+			<div class="input-field col s2">
+				<input type="text" name="pApellido" id="inputpApellido" ng-model="Nuevo.P_Apellido" class="validate" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*">
+				<label for="inputpApellido" data-error="Sólo Letras" data-success="">Primer Apellido</label>
+			</div>
+			<div class="input-field col s2">
+				<input type="text" name="sApellido" id="inputsApellido" ng-model="Nuevo.S_Apellido" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+				<label for="inputsApellido" data-error="Sólo Letras" data-success="">Segundo Apellido</label>
+			</div>
+			<div class="input-field col s3">
+				<input type="text" name="nombres" id="inputNombres" ng-model="Nuevo.Nombres" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+				<label for="inputNombres" data-error="Sólo Letras" data-success="">Nombres</label>
+			</div>
+			<div class="input-field col s4">
+					<select id="cmbSexo">
+						<option selected="false" disabled="false">Seleccione una Opción</option>
+						<option value="1-Masculino">Masculino</option>
+						<option value="2-Femenino">Femenino</option>
+					</select>
+					<label for="cmbSexo">Sexo</label>
+				</div>
+
+			<div class="input-field col s5">
+				<fieldset> <legend>Nacionalidad</legend>
+				<input type="radio" name="Nacionalidad" id="radioCol" ng-model="Nuevo.Nacionalidad" class="with-gap" >
+				<label for="radioCol">Colombiano</label>
+
+				<input type="radio" name="Nacionalidad" id="radioExtranjero" ng-model="Nuevo.Nacionalidad" class="with-gap">
+				<label for="radioExtranjero">Extranjero</label>	
+				</fieldset>
+			</div>	
+
+				<div class="input-field col s3">
+					<input type="text" name="paisnacionalidad" id="inputPaisNac" ng-model="Nuevo.Pais" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="autocomplete validate">
+					<label for="inputPaisNac" data-error="Sólo Letras" data-success="">Pais</label>
+				</div>
+			</fieldset>
+				
+				
+			</div>
+			
+			<div class="row">
+				<fieldset> <legend> Fecha y Lugar de Nacimiento </legend>
+					<div class="input-field col s3">
+						<input class="datepicker" type="date" name="fechaNac" id="inputNacimiento" ng-model="Nuevo.Fecha_Nacimiento">
+						<label for="inputNacimiento">Fecha de Nacimiento</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="pais" id="inputPaisNaci" ng-model="Nuevo.Pais_Nacimiento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate autocomplete">
+						<label for="inputPaisNaci" data-error="Sólo Letras" data-success="">Pais</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="departamento" id="inputDepartamentoNaci" ng-model="Nuevo.Depar_Nacimiento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+						<label for="inputDepartamentoNaci" data-error="Sólo Letras" data-success="">Departamento</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="municipio" id="inputMunicipioNaci" ng-model="Nuevo.Muni_Nacimiento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+						<label for="inputMunicipioNaci" data-error="Sólo Letras" data-success="">Municipio</label>
+					</div>
+				</fieldset>
+				<div class="row"></div>
+				<fieldset> <legend>Direccion de Correspondencia</legend>
+					<div class="input-field col s3">
+						<input type="text" name="direccion" id="inputDireccion" ng-model="Nuevo.Direccion" class="validate">
+						<label for="inputDireccion">Direccion</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="pais" id="inputPaisCorr" ng-model="Nuevo.Pais_Actual" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate autocomplete">
+						<label for="inputPaisCorr" data-error="Sólo Letras" data-success="">Pais</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="departamento" id="inputDepartamentoCorr" ng-model="Nuevo.Depar_Actual" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+						<label for="inputDepartamentoCorr" data-error="Sólo Letras" data-success="">Departamento</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="municipio" id="inputMunicipioCorr" ng-model="Nuevo.Muni_Actual" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
+						<label for="inputMunicipioCorr" data-error="Sólo Letras" data-success="">Municipio</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="number" name="telefono" id="inputTelefonoCorr" ng-model="Nuevo.Telefono" pattern="[0-9]*" class="validate">
+						<label for="inputTelefonoCorr" data-error="Sólo Números" data-success="">Telefono</label>
+					</div>
+					<div class="input-field col s3">
+						<input type="text" name="municipio" id="inputEmailCorr" ng-model="Nuevo.Email" pattern="[A-Za-záéíóúAÉÍÓÚÑñ\s0-9._%+-]+@[A-Za-záéíóúAÉÍÓÚÑñ\s0-9.-]+\.[A-Za-záéíóúAÉÍÓÚÑñ\s]{2,4}$" class="validate">
+						<label for="inputEmailCorr" data-error="Correo no válido" data-success="">Email</label>
+					</div>
+				</fieldset>
+				<div class="row"></div>
+				<fieldset> <legend>Documentos Adjuntos</legend>
+				<div class="file-field input-field">
+      			<div class="btn grey">
+        			<span><i class="material-icons">archive</i></span>
+        			<!-- <input type="file" onchange="angular.element(this).scope().photoChanged(this.files)"> -->
+        			<input type="file" onchange="angular.element(this).scope().cambio(event)" id="file1">
+      			</div>
+      			<div class="file-path-wrapper">
+        			<input class="file-path validate" type="text" placeholder="Adjuntar Uno o Mas Archivos">
+      			</div>
+    			</div>
+				</fieldset>
+
+				<div class="row"></div>
+				<button class="btn grey" ng-click="registar()">Registrar</button>
+			</div>
+		</div>
+	</div>

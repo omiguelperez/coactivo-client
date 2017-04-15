@@ -1,0 +1,65 @@
+<div class="col s10 offset-s1">
+	<div class="card-panel z-depth-2">
+		<h3><span><i class="material-icons medium left">inbox</i>Radicación Magnética</span></h3>
+		<div class="divider"></div>
+
+		<div class="row">
+			<div class="card #e3f2fd blue lighten-5" style="padding: 0.5% 0.4%;"><h5>Radicación de documentos</h5></div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s3">
+	          <input id="dociden" type="text" class="validate">
+	          <label for="dociden">Documento de Iden.</label>
+	        </div>
+
+	        <div class="input-field col s3">
+	          <input id="nomcompl" type="text" class="validate">
+	          <label for="nomcompl">Nombre Completo</label>
+	        </div>
+
+	        <div class="input-field col s3">
+	          <input id="fecharad" type="date" class="datepicker">
+	          <label for="fecharad">Fecha Radicación</label>
+	        </div>
+
+	        <div class="input-field col s3">
+	          <input id="numradi" type="text" class="validate">
+	          <label for="numradi">Número Radicado</label>
+	        </div>
+		</div>
+
+		<div class="row center-align">
+			<button class="waves-effect waves-light btn #ffffff white"><i class="material-icons orange600">search</i></button>
+		</div>
+
+		<div class="row">
+			<table class="bordered highlight centered responsive-table">
+		        <thead>
+		          <tr>
+		              <th>Tipo Documento</th>
+		              <th>Número Radicado</th>
+		              <th>Fecha Radicación</th>
+		              <th>Periodo Gravable</th>
+		              <th>Valor</th>
+		              <th>Opciones</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		        	<tr ng-repeat="dato in datos">
+		        		<td>{{dato.Tipo}}</td>
+	                    <td>{{dato.Numero}}</td>
+	                    <td>{{dato.Fecha}}</td>
+	                    <td>{{dato.Periodo}}</td>
+	                    <td>{{dato.Valor | currency:"$":0}}</td>
+		        		<td>
+		        			<i class="material-icons hand_click" ng-click="modal('edit_modal')">mode_edit</i>
+		        			<i class="material-icons hand_click" ng-click="modal('delete_modal')">delete_forever</i>
+		        		</td>
+		        	</tr>
+		        </tbody>
+		    </table>
+		</div>
+	</div>
+</div>
