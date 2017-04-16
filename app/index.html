@@ -13,10 +13,11 @@
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
   <!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="styles/estilos.css">
+  
   <!-- endbuild -->
   <link rel="stylesheet" type="text/css" href="bower_components/materialize-css/dist/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="styles/estilos.css">
 
 </head>
 <body ng-app="desktopApp" ng-controller="IndexController">
@@ -40,6 +41,9 @@
     <li><a href="#!/Radicar">Radicar</a></li>
     <li><a href="#!/ConfirmarRadicacion">Confirmar Radicación</a></li>
     <li><a href="#!/RadicacionMagnetica">Radicación Magnética</a></li>
+    <li><a href="#!/RadicarDocumento">Radicar documento</a></li>
+    <li><a href="#!/EditarRadicarDocumento">Editar documento radicado</a></li>
+    <li><a href="#!/DocumentoConstancia">Documento de constancia</a></li>
   </ul>
   <!-- modulos del sistema -->
   <div class="row adaptar">
@@ -87,6 +91,9 @@
    <script src="scripts/controllers/RadicaMagneticaController.js"></script>
    <script src="scripts/controllers/RadicarController.js"></script>
    <script src="scripts/controllers/RegCarteraController.js"></script>
+   <script src="scripts/controllers/RadicarDocumentoController.js"></script>
+   <script src="scripts/controllers/DocumentoConstanciaController.js"></script>
+   <script src="scripts/controllers/EditarRadicarDocumentoController.js"></script>
    <!-- endbuild -->
 
    <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->

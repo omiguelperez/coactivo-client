@@ -1,0 +1,201 @@
+<div class="col s10 offset-s1">
+    <div class="card-panel z-depth-2">
+        <h3><span><i class="material-icons medium left">inbox</i>Documentos de constancia</span></h3>
+        <div class="row">
+            <div class="input-field col s3 offset-s3">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="deudor" type="text" class="validate">
+                <label for="deudor">N° de documento</label>
+            </div>
+            
+            <div class="input-field col s3">
+                <select id="tipo_documento">
+                    <option value="1-Cedula">Cedula</option>
+                    <option value="2-Cedula Ex">Cedula Ex</option>
+                    <option value="3-Pasaporte">Pasaporte</option>
+                </select>
+                <label for="tipo_documento">Tipo de documento</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col s6">
+                <h6>Constancia de notificacion:</h6>
+                <input class="with-gap" name="group1" type="radio" id="si1" checked />
+                <label for="si1">Si</label>
+                
+                <input class="with-gap" name="group1" type="radio" id="no1" checked />
+                <label for="no1">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file1">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+                
+                <h6>Copia de la citacion:</h6>
+                <input class="with-gap" name="group2" type="radio" id="si2" checked />
+                <label for="si2">Si</label>
+                
+                <input class="with-gap" name="group2" type="radio" id="no2" checked />
+                <label for="no2">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file2">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <div class="col s6">
+                <h6>Constancia de ejecutaria</h6>
+                <input class="with-gap" name="group3" type="radio" id="si3" checked />
+                <label for="si3">Si</label>
+                
+                <input class="with-gap" name="group3" type="radio" id="no3" checked />
+                <label for="no3">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file3">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-left: 1%;">
+            <h6><strong>¿Ha sido objeto de recursos?</strong></h6>
+            <input class="with-gap" name="group4" type="radio" id="si4" checked />
+            <label for="si4">Si</label>
+
+            <input class="with-gap" name="group4" type="radio" id="no4" checked />
+            <label for="no4">No</label>
+        </div>        
+        <br>
+        <div class="row">
+            <div class="col s6">
+                <h6>Constancia de notificacion:</h6>
+                <input class="with-gap" name="group5" type="radio" id="si5" checked />
+                <label for="si5">Si</label>
+                
+                <input class="with-gap" name="group5" type="radio" id="no5" checked />
+                <label for="no5">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file5">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+                
+                <h6>Documento de providencia:</h6>
+                <input class="with-gap" name="group6" type="radio" id="si6" checked />
+                <label for="si6">Si</label>
+                
+                <input class="with-gap" name="group6" type="radio" id="no6" checked />
+                <label for="no6">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file6">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <div class="col s6">
+                <h6>Copia de la citacion:</h6>
+                <input class="with-gap" name="group7" type="radio" id="si7" checked />
+                <label for="si7">Si</label>
+                
+                <input class="with-gap" name="group7" type="radio" id="no7" checked />
+                <label for="no7">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file7">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-left: 1%;">
+            <h6><strong>Documentacion por edicto:</strong></h6>
+            <input class="with-gap" name="group8" type="radio" id="si8" checked />
+            <label for="si8">Si</label>
+
+            <input class="with-gap" name="group8" type="radio" id="no8" checked />
+            <label for="no8">No</label>
+        </div>        
+        <br>
+        <div class="row">
+            <div class="col s6">
+                <h6>Copia del edicto:</h6>
+                <input class="with-gap" name="group9" type="radio" id="si9" checked />
+                <label for="si9">Si</label>
+                
+                <input class="with-gap" name="group9" type="radio" id="no9" checked />
+                <label for="no9">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file9">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s6">
+                <h6>Constancia de fijacion de desfijacion:</h6>
+                <input class="with-gap" name="group10" type="radio" id="si10" checked />
+                <label for="si10">Si</label>
+                
+                <input class="with-gap" name="group10" type="radio" id="no10" checked />
+                <label for="no10">No</label>
+                
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        Seleccionar
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file10">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" style="float: right;">Guardar</button>
+        <div class="row"></div>
+    </div>    
+</div>
+

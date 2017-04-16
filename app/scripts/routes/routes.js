@@ -17,6 +17,18 @@ angular.module('desktopApp', ['ngRoute']).config(function($routeProvider) {
 	.when('/RadicacionMagnetica', {
 		templateUrl: 'views/Abogado/radica_magnetica.html',
 		controller: 'RadicaMagneticaController'
-	});
+	})
+	.when('/RadicarDocumento', {
+      templateUrl: 'views/Abogado/radicar_documento.html',
+      controller: 'RadicarDocumentoController'
+    })
+    .when('/DocumentoConstancia', {
+      templateUrl: 'views/Secretaria/documento_constancia.html',
+      controller: 'DocumentoConstanciaController'
+    })
+    .when('/EditarRadicarDocumento', {
+      templateUrl: 'views/Abogado/editar_radicar_documento.html',
+      controller: 'EditarRadicarDocumentoController'
+    });
 
 })

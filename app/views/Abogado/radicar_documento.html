@@ -1,0 +1,75 @@
+<div class="col s10 offset-s1">
+    <div class="card-panel z-depth-2">
+        <h3><span><i class="material-icons medium left">inbox</i>Radicar documento</span></h3>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s6">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="deudor" type="text" class="validate">
+                    <label for="deudor">Deudor</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <select id="tipo_documento">
+                        <option value="1-Cedula">Cedula</option>
+                        <option value="2-Cedula Ex">Cedula Ex</option>
+                        <option value="3-Pasaporte">Pasaporte</option>
+                    </select>
+                    <label for="tipo_documento">Tipo de documento</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">place</i>
+                    <input id="direccion_domicilio" type="text" class="validate">
+                    <label for="direccion_domicilio">Direccion de domicilio</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">attach_money</i>
+                    <input id="valor_obligacion" type="text" class="validate">
+                    <label for="valor_obligacion">Valor de la obligacion</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">folder</i>
+                    <input id="numero_folio" type="text" class="validate">
+                    <label for="numero_folio">Numero de folio</label>
+                </div>
+            </div>
+
+            <div class="col s6">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="nombre" type="text" class="validate">
+                    <label for="nombre">Nombre completo</label>
+                </div>
+                
+                <div class="input-field col s12" style="visibility: hidden;">
+                    <input id="none" type="text" class="validate">
+                    <label for="none">None</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">date_range</i>
+                    <input id="fecha_prescripcion" type="text" class="validate">
+                    <label for="fecha_prescripcion">Fecha de la prescripcion</label>
+                </div>    
+                <div class="row"></div>
+                <div class="file-field input-field">
+                    <div class="btn grey">
+                        <span><i class="material-icons">archive</i></span>
+                        <!-- <input type="file" onchange="angular.element(this).scope().photoChanged(this.files)"> -->
+                        <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file1">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Adjuntar uno o mas archivos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a class="btn-floating btn-large waves-effect waves-light black" style="float: right;"><i class="material-icons">add</i></a>
+        <div class="row"></div>
+    </div>
+</div>
