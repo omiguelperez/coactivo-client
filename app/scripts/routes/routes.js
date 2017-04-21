@@ -1,5 +1,7 @@
 
-angular.module('desktopApp', ['ngRoute']).config(function($routeProvider) {
+angular.module(App,['ngRoute'])
+
+.config(function($routeProvider) {
 
 	$routeProvider
 	.when('/RegistarCartera', {
@@ -31,4 +33,4 @@ angular.module('desktopApp', ['ngRoute']).config(function($routeProvider) {
       controller: 'EditarRadicarDocumentoController'
     });
 
-})
+});

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="serverApp">
+<head>
+	<title>Inicio de Sesión</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+	<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
+
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/materialize/bin/materialize.js"></script>
+
+</head>
+<body  ng-controller="LoginController">
+	<div class="">
+		<div class="row">
+			<div class="col s12  l4 offset-l4 m6 offset-m3">
+				<div class="card-panel" style="margin-top: 30px">
+
+					<div class="col s1 l1 m1">
+						<a href="#" class="btn-floating grey lighten-1 waves-effect waves-light"><i class="material-icons small">arrow_back</i></a>
+					</div>
+				
+					<div class="row"></div>
+					
+					<div class="row">
+						<div class="col s4 l4 m4 offset-s4 offset-l4 offset-m4">
+							<img class="circle responsive-img" src="images/user.jpg">
+						</div>
+					</div>
+
+					<div class="divider"></div>
+
+					<div class="input-field col s10 offset-s1">
+						<input type="text" name="user" id="textIdentificacion" required autofocus="true" ng-model="username">
+						<label for="textIdentificacion">Usuario</label>
+					</div>
+					<div class="input-field col s10 offset-s1">
+						<input type="password" name="pass" id="textPass" required ng-model="password">
+						<label for="textPass">Contraseña</label>
+					</div>
+					
+					<div class="center-align red-text" ng-show="error">Username or password is incorrect</div>
+
+					<div class="row"></div>
+					
+					<div class="row">
+						<div class="col s6 l6 offset-s3 offset-l3">
+							<button id="btningresar" class="col s12 waves-effect waves-light btn amber" ng-click="login()">Ingresar</button>	
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script> -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+
+<script src="scripts/app.js"></script>
+<!-- <script src="scripts/routes/routes.js"></script> -->
+<script src="scripts/services/AuthenticationService.js"></script>
+<script src="scripts/controllers/LoginController.js"></script>
+
+<!-- scripts for fake backend -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-mocks.js"></script>
+<script src="scripts/server-temp/fake-backend.js"></script>
+
+</html>
