@@ -8,6 +8,20 @@
  * Controller of the desktopApp
  */
 App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio) {
+
+  $('input.autocomplete').autocomplete({
+      data: {
+        "Colombia": null,
+        "Estados Unidos": null,
+        "España": null
+          //"España": 'http://placehold.it/250x250'
+        },
+        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+        onAutocomplete: function(val) {
+          // Callback function when value is autcompleted.
+        },
+        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    });
 	
 	$scope.thumbnail = [];
   // Read the image using the filereader 

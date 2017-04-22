@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="serverApp">
 <head>
   <meta charset="utf-8">
   <title>Cobro Coactivo</title>
@@ -21,36 +21,11 @@
   <link rel="stylesheet" href="styles/estilos.css">
 
 </head>
-<body ng-app="desktopApp" ng-controller="IndexController">
+<body ng-app="desktopApp">
 
-  <nav class="grey"></nav>
-  <ul class="side-nav fixed">
-    <li>
-      <div class="userView">
-        <div class="background">
-          <img src="images/sidenavFondo.jpg">  
-        </div>
-        <span class="user"><img class="circle" src="images/sidenavFondo.jpg"></span>
-        <span>
-          <a href="#"><span class="name white-text">Samir miranda</span></a>
-          <span class="email white-text">Secretario <br> saanm2@gmail.com</span>
-        </span>
+<div ui-view></div>
 
-      </div>
-    </li>
-    <li><a href="#!/RegistarCartera">Registrar Cartera</a></li>
-    <li><a href="#!/Radicar">Radicar</a></li>
-    <li><a href="#!/ConfirmarRadicacion">Confirmar Radicación</a></li>
-    <li><a href="#!/RadicacionMagnetica">Radicación Magnética</a></li>
-    <li><a href="#!/RadicarDocumento">Radicar documento</a></li>
-    <li><a href="#!/EditarRadicarDocumento">Editar documento radicado</a></li>
-    <li><a href="#!/DocumentoConstancia">Documento de constancia</a></li>
-    <li><a href="#!/close" ng-click="CerrarSesion()">Cerrar sesion</a></li>
-  </ul>
-  <!-- modulos del sistema -->
-  <div class="row adaptar">
-    <div ng-view></div>
-  </div>
+  <!--  -->
 
   <script>
    !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -77,7 +52,7 @@
  <!-- endbower -->
  <!-- endbuild -->
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
  <script src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js></script>
  
@@ -96,6 +71,7 @@
    <script src="scripts/controllers/about.js"></script>
    <script src="scripts/controllers/contactos.js"></script> -->
    <script src="scripts/controllers/IndexController.js"></script>
+   <script src="scripts/controllers/LoginController.js"></script>
    <script src="scripts/controllers/ConfirmRadicaController.js"></script>
    <script src="scripts/controllers/RadicaMagneticaController.js"></script>
    <script src="scripts/controllers/RadicarController.js"></script>

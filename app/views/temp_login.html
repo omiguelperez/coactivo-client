@@ -1,0 +1,41 @@
+<div class="">
+		<div class="row">
+			<div class="col s12  l4 offset-l4 m6 offset-m3">
+				<div class="card-panel" style="margin-top: 30px">
+
+					<div class="col s1 l1 m1">
+						<a href="#" class="btn-floating grey lighten-1 waves-effect waves-light"><i class="material-icons small">arrow_back</i></a>
+					</div>
+				
+					<div class="row"></div>
+					
+					<div class="row">
+						<div class="col s4 l4 m4 offset-s4 offset-l4 offset-m4">
+							<img class="circle responsive-img" src="images/user.jpg">
+						</div>
+					</div>
+
+					<div class="divider"></div>
+
+					<div class="input-field col s10 offset-s1">
+						<input type="text" name="user" id="textIdentificacion" required autofocus="true" ng-model="username">
+						<label for="textIdentificacion">Usuario</label>
+					</div>
+					<div class="input-field col s10 offset-s1">
+						<input type="password" name="pass" id="textPass" required ng-model="password">
+						<label for="textPass">Contraseña</label>
+					</div>
+					
+					<div class="center-align red-text" ng-show="error" ng-cloak>Username or password is incorrect</div>
+
+					<div class="row"></div>
+					
+					<div class="row">
+						<div class="col s6 l6 offset-s3 offset-l3">
+							<button id="btningresar" class="col s12 waves-effect waves-light btn amber" ng-click="login()">Ingresar</button>	
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,28 @@
+<nav class="grey"></nav>
+  <ul class="side-nav fixed">
+    <li>
+      <div class="userView">
+        <div class="background">
+          <img src="images/sidenavFondo.jpg">  
+        </div>
+        <span class="user"><img class="circle" src="images/sidenavFondo.jpg"></span>
+        <span>
+          <a href="#"><span class="name white-text">Samir miranda</span></a>
+          <span class="email white-text">Secretario <br> saanm2@gmail.com</span>
+        </span>
+
+      </div>
+    </li>
+    <li><a ui-sref="home.RegistarCartera">Registrar Cartera</a></li>
+    <li><a ui-sref="home.Radicar">Radicar</a></li>
+    <li><a ui-sref="home.ConfirmarRadicacion">Confirmar Radicación</a></li>
+    <li><a ui-sref="home.RadicacionMagnetica">Radicación Magnética</a></li>
+    <li><a ui-sref="home.RadicarDocumento">Radicar documento</a></li>
+    <li><a ui-sref="home.DocumentoConstancia">Editar documento radicado</a></li>
+    <li><a ui-sref="home.EditarRadicarDocumento">Documento de constancia</a></li>
+    <li><a href="#!/close" ng-click="CerrarSesion()">Cerrar sesion</a></li>
+  </ul>
+  
+  <div class="row adaptar">
+    <div ui-view="MainView"></div>
+  </div>

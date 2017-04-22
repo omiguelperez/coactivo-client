@@ -1,18 +1,19 @@
-App.service('AuthenticationService', function($http, $cookies) {
+App.service('AuthenticationService', function($http, $localStorage) {
 
   this.Login = function(username, password, callback) {
     var resp;
     $http.post('/api', { username: username, password: password })
     .then(function (response) {
+      console.log(response.data);
       if (response.data.state === 1) {
 
-        $cookies.put('CobroCoactivo', response.data.token);
+        $localStorage.currentUser = { username: username, token: response.data.token };
 
         // execute callback with true to indicate successful login
-        callback(true);
+        callback(true,username);
       } else {
         // execute callback with false to indicate failed login
-        callback(false);
+        callback(false,null);
       }
     });
   }
@@ -20,7 +21,7 @@ App.service('AuthenticationService', function($http, $cookies) {
   this.SesionActiva = function() {
     var msg;
 
-    if ($cookies.get('CobroCoactivo')) {
+    if ($localStorage.currentUser) {
       msg=true;
     }else{
       msg=false;
@@ -31,6 +32,6 @@ App.service('AuthenticationService', function($http, $cookies) {
 
 
   this.Logout = function() {
-    $cookies.remove('CobroCoactivo');
+   delete $localStorage.currentUser;
   }
 });

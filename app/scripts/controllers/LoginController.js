@@ -7,21 +7,20 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('LoginController', function ($scope, AuthenticationService) {
+App.controller('LoginController', function ($scope, $location, AuthenticationService) {
     
 	initController();
 
     function initController() {
-        // if (AuthenticationService.SesionActiva()){
-        //     $scope.mirror = true;
-        // };
+
     };
 
     $scope.login = function() {
     	$scope.error = false;
-        AuthenticationService.Login($scope.username, $scope.password, function(resp) {
+        console.log($scope.username+" "+ $scope.password);
+        AuthenticationService.Login($scope.username, $scope.password, function(resp,user) {
             if (resp) {
-                window.location = "/";
+                $location.path("/"+user);
             } else {
                 $scope.error = true;
             }   

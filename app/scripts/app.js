@@ -21,21 +21,19 @@
   'ngStorage'
   ]);
 
- App.run(function($rootScope, $http, $location, $cookies) {
-
-    // keep user logged in after page refresh
-    // if ($localStorage.currentUser) {
-    //   $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-    // }
+ App.run(function($rootScope, $http, $location, $localStorage) {
 
     // redirect to login page if not logged in and trying to access a restricted page
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-      var publicPages = ['/login.html'];
-      var restrictedPage = publicPages.indexOf(window.location.pathname) === -1;
-      if (restrictedPage && !$cookies.get('CobroCoactivo')) {
-        window.location = '/login.html';
-      }else if(!restrictedPage && $cookies.get('CobroCoactivo')){
-        window.location = '/';
+      var publicPages = ['#!/login'];
+      var restrictedPage = publicPages.indexOf(window.location.hash) === -1;
+
+      console.log(!restrictedPage +" "+ $localStorage.currentUser);
+
+      if (restrictedPage && !$localStorage.currentUser) {
+          $location.path('/login');
+      }else if(!restrictedPage && $localStorage.currentUser){
+          $location.path('/'+$localStorage.currentUser.username);
       }
     });
 
