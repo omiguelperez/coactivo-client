@@ -7,19 +7,26 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module(App).controller('LoginController', function ($scope, $localStorage, $location, AuthenticationService) {
-
+App.controller('LoginController', function ($scope, AuthenticationService) {
+    
 	initController();
 
     function initController() {
-        // reset login status
-        console.log(AuthenticationService.SesionActiva());
+        // if (AuthenticationService.SesionActiva()){
+        //     $scope.mirror = true;
+        // };
     };
 
     $scope.login = function() {
     	$scope.error = false;
         AuthenticationService.Login($scope.username, $scope.password, function(resp) {
+            if (resp) {
+                window.location = "/";
+            } else {
+                $scope.error = true;
+            }   
 
         });
+
     };
 });

@@ -45,6 +45,7 @@
     <li><a href="#!/RadicarDocumento">Radicar documento</a></li>
     <li><a href="#!/EditarRadicarDocumento">Editar documento radicado</a></li>
     <li><a href="#!/DocumentoConstancia">Documento de constancia</a></li>
+    <li><a href="#!/close" ng-click="CerrarSesion()">Cerrar sesion</a></li>
   </ul>
   <!-- modulos del sistema -->
   <div class="row adaptar">
@@ -61,6 +62,7 @@
    ga('send', 'pageview');
  </script>
 
+
  <!-- build:js(.) scripts/vendor.js -->
  <!-- bower:js -->
  <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -74,16 +76,22 @@
  <script src="bower_components/materialize/bin/materialize.js"></script>
  <!-- endbower -->
  <!-- endbuild -->
-
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+ <script src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js></script>
+ 
  <!-- build:js({.tmp,app}) scripts/scripts.js -->
  <script src="scripts/app.js"></script>
-
  <script src="scripts/routes/routes.js"></script>
+
+ <script src="scripts/services/AuthenticationService.js"></script>
  <!-- <script src="scripts/routes/contactos.js"></script> -->
 
  <!-- <script src="scripts/services/ContactosService.js"></script> -->
  <script src="scripts/services/MyServices.js"></script>
 
+  
   <!--  <script src="scripts/controllers/main.js"></script>
    <script src="scripts/controllers/about.js"></script>
    <script src="scripts/controllers/contactos.js"></script> -->
@@ -96,6 +104,11 @@
    <script src="scripts/controllers/DocumentoConstanciaController.js"></script>
    <script src="scripts/controllers/EditarRadicarDocumentoController.js"></script>
    <!-- endbuild -->
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-mocks.js"></script>
+<script src="scripts/server-temp/fake-backend.js"></script>
 
    <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
    <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio) {
+App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio) {
 	
 	$scope.thumbnail = [];
   // Read the image using the filereader 

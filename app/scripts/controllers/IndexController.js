@@ -7,7 +7,21 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('IndexController', function ($scope) {
+App.controller('IndexController', function ($scope, AuthenticationService) {
+
+	initController();
+
+	function initController() {
+        // reset login status
+        // if (!AuthenticationService.SesionActiva()){
+        //     window.location = "/login.html";
+        // };
+    }
+
+	$scope.CerrarSesion = function() {
+		AuthenticationService.Logout();
+		window.location = "/login.html"
+	}
 	
 	$scope.$on('$viewContentLoaded', function(){
 	    //Here your view content is fully loaded !!

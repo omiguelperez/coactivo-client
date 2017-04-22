@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('RadicaMagneticaController', function ($scope,MiServicio) {
+App.controller('RadicaMagneticaController', function ($scope,MiServicio) {
 
 	$scope.datos = MiServicio.get_Radicaciones();
 	

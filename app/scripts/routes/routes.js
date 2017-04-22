@@ -1,7 +1,5 @@
 
-angular.module(App,['ngRoute'])
-
-.config(function($routeProvider) {
+App.config(function($routeProvider) {
 
 	$routeProvider
 	.when('/RegistarCartera', {

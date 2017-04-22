@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('DocumentoConstanciaController', function ($scope, MiServicio) {
+App.controller('DocumentoConstanciaController', function ($scope, MiServicio) {
 	
 	$('select').material_select();
 

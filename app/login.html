@@ -43,7 +43,7 @@
 						<label for="textPass">Contraseña</label>
 					</div>
 					
-					<div class="center-align red-text" ng-show="error">Username or password is incorrect</div>
+					<div class="center-align red-text" ng-show="error" ng-cloak>Username or password is incorrect</div>
 
 					<div class="row"></div>
 					
@@ -51,20 +51,27 @@
 						<div class="col s6 l6 offset-s3 offset-l3">
 							<button id="btningresar" class="col s12 waves-effect waves-light btn amber" ng-click="login()">Ingresar</button>	
 						</div>
-					</div>
-
+					</div>					
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+ <script src="bower_components/angular/angular.js"></script>
+ <script src="bower_components/angular-animate/angular-animate.js"></script>
+ <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+ <script src="bower_components/angular-resource/angular-resource.js"></script>
+ <script src="bower_components/angular-route/angular-route.js"></script>
+ <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+ <script src="bower_components/angular-touch/angular-touch.js"></script>
+ <script src="bower_components/materialize/bin/materialize.js"></script>
 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script> -->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js></script>
 
 <script src="scripts/app.js"></script>
 <!-- <script src="scripts/routes/routes.js"></script> -->

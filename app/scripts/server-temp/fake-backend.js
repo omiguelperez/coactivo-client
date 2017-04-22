@@ -1,11 +1,11 @@
 
     angular
-        .module('serverApp',[App, 'ngMockE2E'])
+        .module('serverApp',['desktopApp','ngMockE2E'])
         .run(setupFakeBackend);
 
     // setup fake backend for backend-less development
     function setupFakeBackend($httpBackend) {
-        var testUser = { username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
+        var testUser = { username: 'Abogado', password: 'Abogado', firstName: 'Test', lastName: 'User' };
 
         // fake authenticate api end point
         $httpBackend.whenPOST('/api').respond(function (method, url, data) {

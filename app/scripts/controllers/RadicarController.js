@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('RadicarController', function ($scope,MiServicio) {
+App.controller('RadicarController', function ($scope,MiServicio) {
 	
 	$scope.datos = MiServicio.get_Radicaciones();
 

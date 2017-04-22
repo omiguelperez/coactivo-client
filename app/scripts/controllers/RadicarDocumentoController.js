@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('RadicarDocumentoController', function ($scope, MiServicio) {
+App.controller('RadicarDocumentoController', function ($scope, MiServicio) {
     $('select').material_select();
 });
 

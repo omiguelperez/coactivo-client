@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-angular.module('desktopApp').controller('ConfirmRadicaController', function ($scope,MiServicio) {
+App.controller('ConfirmRadicaController', function ($scope,MiServicio) {
 
 	
 });

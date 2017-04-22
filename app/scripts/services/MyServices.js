@@ -1,5 +1,5 @@
 
-angular.module(App).service("MiServicio", function ($http) {  
+App.service("MiServicio", function ($http) {  
 
 	this.get_Radicaciones = function() {
 		return [{"Tipo":"Cartera","Numero":"123456","Fecha":"20/11/2014","Periodo":"20/11/2014-20/02/2015","Valor":"5000000"},
