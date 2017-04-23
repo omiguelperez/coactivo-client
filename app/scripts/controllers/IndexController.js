@@ -29,5 +29,4 @@ App.controller('IndexController', function ($scope, $location, AuthenticationSer
 		  });
 		$('.modal').modal();
 	  });
-
 });

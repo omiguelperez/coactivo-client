@@ -1,30 +1,21 @@
 
 App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise("/Login");
+	$urlRouterProvider.otherwise("/login");
 
 	$stateProvider
 	.state('login', {
         url: "/login",
 		templateUrl: "views/temp_login.html",
         controller: 'LoginController'
-    }).state('Abogado', {
+    })
+
+    .state('Abogado', {
         url: "/Abogado",
         templateUrl: "views/Abogado/index.html",
         controller: 'IndexController'
-    }).state('Secretaria', {
-        url: "/Secretaria",
-        templateUrl: "views/Secretaria/index.html",
-        controller: 'IndexController'
-    }).state('Secretaria.RegistarCartera', {
-        url: "/RegCartera",
-        views:{
-            "MainView@Secretaria":{
-                 templateUrl: "views/Secretaria/RegCartera.html",
-                 controller: 'RegCarteraController'
-            }
-        } 
-    }).state('Abogado.Radicar', {
+    })
+    .state('Abogado.Radicar', {
         url: "/Radicar",
         views:{
             "MainView@Abogado":{
@@ -32,7 +23,8 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
                  controller: 'RadicarController'
             }
         } 
-    }).state('Abogado.ConfirmarRadicacion', {
+    })
+    .state('Abogado.ConfirmarRadicacion', {
         url: "/ConfirmarRadicacion",
         views:{
             "MainView@Abogado":{
@@ -40,7 +32,8 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
 				controller: 'ConfirmRadicaController'
             }
         } 
-    }).state('Abogado.RadicacionMagnetica', {
+    })
+    .state('Abogado.RadicacionMagnetica', {
         url: "/RadicacionMagnetica",
         views:{
             "MainView@Abogado":{
@@ -48,7 +41,8 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
 				controller: 'RadicaMagneticaController'
             }
         } 
-    }).state('Abogado.RadicarDocumento', {
+    })
+    .state('Abogado.RadicarDocumento', {
         url: "/RadicarDocumento",
         views:{
             "MainView@Abogado":{
@@ -56,7 +50,8 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
       			controller: 'RadicarDocumentoController'
             }
         } 
-    }).state('Abogado.DocumentoConstancia', {
+    })
+    .state('Abogado.DocumentoConstancia', {
         url: "/DocumentoConstancia",
         views:{
             "MainView@Abogado":{
@@ -64,12 +59,47 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
  			    controller: 'DocumentoConstanciaController'
             }
         } 
-    }).state('Abogado.EditarRadicarDocumento', {
+    })
+    .state('Abogado.EditarRadicarDocumento', {
         url: "/EditarRadicarDocumento",
         views:{
             "MainView@Abogado":{
                 templateUrl: 'views/Abogado/editar_radicar_documento.html',
       			controller: 'EditarRadicarDocumentoController'
+            }
+        } 
+    })
+
+
+    .state('Secretaria', {
+        url: "/Secretaria",
+        templateUrl: "views/Secretaria/index.html",
+        controller: 'IndexController'
+    })
+    .state('Secretaria.RegistarCartera', {
+        url: "/RegCartera",
+        views:{
+            "MainView@Secretaria":{
+                 templateUrl: "views/Secretaria/RegCartera.html",
+                 controller: 'RegCarteraController'
+            }
+        } 
+    })
+    .state('Secretaria.RegistarCartera_P1', {
+        url: "/RegCartera/Paso1",
+        views:{
+            "MainView@Secretaria":{
+                 templateUrl: "views/Secretaria/RegCartera_Paso_1.html",
+                 controller: 'RegCarteraController'
+            }
+        } 
+    })
+    .state('Secretaria.RegistarCartera_P2', {
+        url: "/RegCartera/Paso2",
+        views:{
+            "MainView@Secretaria":{
+                 templateUrl: "views/Secretaria/RegCartera_Paso_2.html",
+                 controller: 'RegCarteraController'
             }
         } 
     });
