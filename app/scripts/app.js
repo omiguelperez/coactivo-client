@@ -26,10 +26,9 @@
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
       var publicPages = ['#!/login'];
       var restrictedPage = publicPages.indexOf(window.location.hash) === -1;
-      console.log(restrictedPage +" "+ $localStorage.currentUser !== null);
-      if (restrictedPage && !$localStorage.currentUser) {
+      if (restrictedPage && $localStorage.currentUser === undefined) {
           $location.path('/login');
-      }else if(restrictedPage && $localStorage.currentUser !== null){
+      }else if(!restrictedPage && $localStorage.currentUser !== undefined){
           $location.path('/'+$localStorage.currentUser.username);
       }
     });
