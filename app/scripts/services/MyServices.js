@@ -21,9 +21,9 @@ App.service("MiServicio", function ($http) {
         		callback(!successCallback.data.error,successCallback.data.mensaje);
         	}
     }, function(errorCallback){
-    	if (errorCallback.status == 400) {
-    		callback(false,errorCallback.data.message);
-    	}
+    	//if (errorCallback.status == 400) {
+    		callback(false,errorCallback.data.exceptionMessage);
+    	//}
     });
 
 	}
