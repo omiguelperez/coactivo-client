@@ -1,5 +1,5 @@
 app.controller('login', function ($scope, $http) {	
-	$scope.user = undefined;
+	$scope.user = undefined
 	$scope.password = "x";
 
 	$scope.iniciar = function () {

@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Mon Apr 24 2017 11:43:46 GMT-0500 (Hora est. Pacífico, Sudamérica)
+// Generated on Mon Apr 24 2017 09:05:47 GMT-0500 (Hora est. Pacífico, Sudamérica)
 
 module.exports = function(config) {
   config.set({
@@ -16,11 +16,9 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         "bower_components/angular/angular.js",
-        "http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js",
-        "http://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js",
         "bower_components/angular-route/angular-route.js",
         "bower_components/angular-mocks/angular-mocks.js",
-        "app/scripts/**/*.js",
+        "angular/**/*.js",
         "tests/**/*.js"
     ],
 

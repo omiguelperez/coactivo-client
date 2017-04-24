@@ -9,7 +9,7 @@ describe("Probando controlador login", function() {
             var $rootScope = $injector.get("$rootScope"), 
             $controller = $injector.get("$controller");
             scope = $rootScope.$new();
-            controller = $controller("login", {$scope: scope});
+            controller = $controller("LoginController", {$scope: scope});
         }));
 
         
@@ -24,7 +24,7 @@ describe("Probando controlador login", function() {
 
         it("EL campo user falta por completar", function()
         {
-            expect(scope.user).toBeDefined();
+            expect(scope.username).toBeDefined();
         });
 
         it("EL campo password falta por completar", function()

@@ -7,7 +7,28 @@ App.service("MiServicio", function ($http) {
 	}
 
 	this.Registar = function(Datos) {
-		return {"estado":true,"mensaje":"Registrado Correctamente","color":"green rounded"};
+
+		$http.post('/api_registrar', { username: username, password: password,grant_type:"password" })
+		.then(function (response) {
+			console.log(response);
+			if (response.status === 200) {
+
+				$localStorage.currentUser = { username: username, token: response.data.access_token };
+
+		        // execute callback with true to indicate successful login
+		        callback(true,response.data.Roles[0],'');
+		    } else {
+		        // execute callback with false to indicate failed login
+		        callback(false,null,'mal');
+		    }
+		}, function(errorCallback){
+			if (errorCallback.status == 400) {
+				console.log(errorCallback);
+				callback(false,null,errorCallback.data.error_description);
+			}
+		});
+
+		return "bien";
 	}
 
 });

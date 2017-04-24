@@ -13,7 +13,7 @@
                 (params.username === testUser2.username && params.password === testUser2.password)) {
                 return [200, { access_token: 'fake-jwt-token',Roles:['Secretaria']}, {}];
             } else {
-                return [400, {error_description:"Usuario incorrecto o contraseña incorrecta"}, {}];
+                return [400, {error_description:"Usuario o contraseña incorrecta"}, {}];
             }
         });
 

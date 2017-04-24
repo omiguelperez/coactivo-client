@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio) {
+App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio,datepicker) {
 
   $('input.autocomplete').autocomplete({
       data: {
@@ -62,15 +62,22 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
     }
   };
 
-	$scope.registar = function() {
+  
 
+	$scope.registar = function() {
+    
     $scope.Nuevo.Cuantia = $scope.Nuevo.Obligacion.Cuantia;
-		$scope.Nuevo.Obligacion.Persona.Sexo = $("#cmbSexo").val();
+	$scope.Nuevo.Obligacion.Persona.Sexo = $("#cmbSexo").val();
     $scope.Nuevo.Identificacion = $scope.Nuevo.Obligacion.Persona.Identificacion;
     $scope.Nuevo.Nombre = $scope.Nuevo.Obligacion.Persona.Nombres;
-    $scope.Nuevo.Obligacion.FechaPreinscripcion = document.getElementById('inputFechaPreins').value;
-    $scope.Nuevo.FechaRadicacion = document.getElementById('inputFechaRadi').value;
+    
+    $scope.Nuevo.Obligacion.FechaPreinscripcion = datepicker.conversor(angular.element('#inputFechaPreins').val());
+    
+    $scope.Nuevo.FechaRadicacion = datepicker.conversor(angular.element('#inputFechaRadi').val());
+    
     console.log($scope.Nuevo);
+
+    console.log(MiServicio.Registar($scope.Nuevo));
 		
     //$scope.msg = MiServicio.Registar($scope.Nuevo);
 
@@ -78,25 +85,4 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
     
     
 	}
-
-	$scope.photoChanged = function(files) {
-      if (files != null) {
-        var file = files[0];
-        if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
-          $timeout(function() {
-            var fileReader = new FileReader();
-            fileReader.readAsDataURL(file); // convert the image to data url. 
-            fileReader.onload = function(e) {
-              $timeout(function() {
-                $scope.thumbnail.dataUrl = e.target.result; // Retrieve the image. 	
-              });
-            }
-          });
-        }
-      }
-    };
-
-    $scope.cambio = function(e) {
-    	$scope.Nuevo.File = URL.createObjectURL(e.target.files[0]);
-    }
 });

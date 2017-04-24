@@ -11,13 +11,13 @@
 
  var App = angular.module('desktopApp', [
   'ngRoute',
-  'ngAnimate',
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngTouch',
+  // 'ngAnimate',
+  // 'ngCookies',
+  // 'ngResource',
+  // 'ngSanitize',
+  // 'ngTouch',
   'ui.router',
-  'ngMessages',
+  // 'ngMessages',
   'ngStorage'
   ]);
 
