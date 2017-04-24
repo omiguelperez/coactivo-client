@@ -12,10 +12,10 @@ App.service('AuthenticationService', function($http, $localStorage) {
             console.log(successCallback.data);
             console.log(successCallback.data.access_token);
             console.log(successCallback.data.token_type);
-            $localStorage.currentUser = { username: username, token: successCallback.data.access_token };
+            $localStorage.currentUser = { username: successCallback.data.roles.split(";")[0], token: successCallback.data.access_token };
   
             // execute callback with true to indicate successful login
-            callback(true,successCallback.data.Roles[0]);//username);
+            callback(true,successCallback.data.roles.split(";")[0]);//username);
         }
     }, function(errorCallback){
         if (errorCallback.status == 400) {
