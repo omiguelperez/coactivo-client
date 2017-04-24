@@ -13,13 +13,16 @@ App.service("MiServicio", function ($http) {
 			url: 'http://localhost:1876/api/expedientes',
 			data: $.param(Datos),
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).then(function(successCallback) {       
-			if (successCallback.status === 200 && successCallback.data.FilasAfectadas > 0 && !successCallback.data.Error) {
-				callback(!successCallback.data.Error,response.data.Mensaje);
-        }
+		}).then(function(successCallback) {   
+			console.log(successCallback);
+			if (successCallback.data.filasAfectadas > 0 && !successCallback.data.error) {
+				callback(!successCallback.data.error,successCallback.data.mensaje);
+        	}else{
+        		callback(!successCallback.data.error,successCallback.data.mensaje);
+        	}
     }, function(errorCallback){
     	if (errorCallback.status == 400) {
-    		callback(successCallback.data.Error,response.data.Mensaje);
+    		callback(false,errorCallback.data.message);
     	}
     });
 
