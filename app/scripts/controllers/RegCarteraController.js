@@ -58,6 +58,7 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
             Municipio:"",
             TipoPersonaId:"",
             Telefono:"",
+            FechaNacimiento:"",
         }
     }
   };
@@ -70,19 +71,21 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
 	$scope.Nuevo.Obligacion.Persona.Sexo = $("#cmbSexo").val();
     $scope.Nuevo.Identificacion = $scope.Nuevo.Obligacion.Persona.Identificacion;
     $scope.Nuevo.Nombre = $scope.Nuevo.Obligacion.Persona.Nombres;
+    $scope.Nuevo.Obligacion.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
     
-    $scope.Nuevo.Obligacion.FechaPreinscripcion = datepicker.conversor(angular.element('#inputFechaPreins').val());
-    
-    $scope.Nuevo.FechaRadicacion = datepicker.conversor(angular.element('#inputFechaRadi').val());
+    $scope.Nuevo.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
+
+    $scope.Nuevo.Obligacion.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
     
     console.log($scope.Nuevo);
 
-    console.log(MiServicio.Registar($scope.Nuevo));
-		
-    //$scope.msg = MiServicio.Registar($scope.Nuevo);
-
-    //Materialize.toast($scope.msg.mensaje, 2000, $scope.msg.color,function(){if($scope.msg.estado){$route.reload()}});
-    
+    MiServicio.Registar($scope.Nuevo,function(resp,msg) {
+        if (resp) {
+            Materialize.toast(msg, 2000, 'green rounded',function(){window.location = "/#!/Secretaria/RegCartera/Paso1"});
+        }else{
+            Materialize.toast(msg, 3000, 'red rounded');
+        }
+    });
     
 	}
 });

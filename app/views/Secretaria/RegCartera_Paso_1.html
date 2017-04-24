@@ -84,10 +84,10 @@
 
 		<div class="row">
 			<fieldset> <legend> Fecha y Lugar de Nacimiento </legend>
-				<!-- <div class="input-field col s3">
+				<div class="input-field col s3">
 					<input class="datepicker" type="date" name="fechaNac" id="inputNacimiento" ng-model="Nuevo.Fecha_Nacimiento">
 					<label for="inputNacimiento">Fecha de Nacimiento</label>
-				</div> -->
+				</div>
 				<div class="input-field col s3">
 					<input type="text" name="pais" id="inputPaisNaci" ng-model="Nuevo.Obligacion.Persona.PaisNacimiento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate autocomplete">
 					<label for="inputPaisNaci" data-error="Sólo Letras" data-success="">Pais Nacimiento</label>
@@ -152,7 +152,7 @@
 				</div>
 
 				<div class="input-field col s6">
-					<input type="date" name="municipio" id="inputFechaRadi" ng-model="Nuevo.FechaRadicacion" class="datepicker">
+					<input type="date" name="municipio" id="inputFechaRadi" class="datepicker">
 					<label for="inputFechaRadi">Fecha Radicación</label>
 				</div>
 
@@ -171,27 +171,27 @@
 			<fieldset> <legend>Obligación</legend>
 
 				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputCuantia" ng-model="Nuevo.Obligacion.Cuantia" pattern="[0-9]*" class="validate">
+					<input type="number" name="municipio" id="inputCuantia" ng-model="Nuevo.Obligacion.Cuantia" pattern="[0-9]*" class="validate">
 					<label for="inputCuantia" data-error="Sólo Números" data-success="">Cuantía</label>
 				</div>
 
 				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputDeuda" ng-model="Nuevo.Obligacion.Deuda" pattern="[0-9]*" class="validate">
+					<input type="number" name="municipio" id="inputDeuda" ng-model="Nuevo.Obligacion.Deuda" pattern="[0-9]*" class="validate">
 					<label for="inputDeuda" data-error="Sólo Números" data-success="">Deuda</label>
 				</div>
 
 				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputEstado" ng-model="Nuevo.Obligacion.Estado" class="validate">
+					<input type="text" name="municipio" id="inputEstado" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" ng-model="Nuevo.Obligacion.Estado" class="validate">
 					<label for="inputEstado">Estado</label>
 				</div>
 
 				<div class="input-field col s6">
-					<input type="date" name="municipio" id="inputFechaPreins" ng-model="Nuevo.Obligacion.FechaPreinscripcion" class="datepicker">
+					<input type="date" name="municipio" id="inputFechaPreins" class="datepicker">
 					<label for="inputFechaPreins">Fecha Preinscripción</label>
 				</div>
 
 				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputTipoObliga" ng-model="Nuevo.Obligacion.TipoObligacionId" class="validate">
+					<input type="text" name="municipio" id="inputTipoObliga" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" ng-model="Nuevo.Obligacion.TipoObligacionId" class="validate">
 					<label for="inputTipoObliga">Tipo Obligación</label>
 				</div>
 

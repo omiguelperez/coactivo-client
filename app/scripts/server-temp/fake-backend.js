@@ -17,6 +17,11 @@
             }
         });
 
+        $httpBackend.whenPOST('/api_registrar').respond(function (method, url, data) {
+            var params = angular.fromJson(data);
+            return [200, {FilasAfectadas:1, Mensaje:"Guardado Correctamente",Error:false}, {}];
+        });
+
 
         // pass through any urls not handled above so static files are served correctly
         $httpBackend.whenGET(/^\w+.*/).passThrough();
