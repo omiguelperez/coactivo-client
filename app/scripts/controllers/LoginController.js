@@ -21,7 +21,6 @@ App.controller('LoginController', function ($scope, $localStorage,$location, Aut
 
     $scope.login = function() {
     	$scope.error = false;
-        console.log($scope.username+" "+ $scope.password);
         AuthenticationService.Login($scope.username, $scope.password, function(resp,user,msg) {
             if (resp) {
                 $location.path("/"+user);

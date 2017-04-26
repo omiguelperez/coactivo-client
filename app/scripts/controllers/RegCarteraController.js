@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio,datepicker) {
+App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker) {
 
   $('input.autocomplete').autocomplete({
       data: {
@@ -22,46 +22,48 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
         },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
-	
-	// $scope.thumbnail = [];
- //  // Read the image using the filereader 
- //  $scope.fileReaderSupported = window.FileReader != null;
 
-	$scope.Nuevo = {
-    Cuantia:"",
-    Descripcion:"",
-    DireccionEjecutado:"",
-    DireccionTituloEjecutivo:"",
-    EntidadEncargada:"",
-    FechaRadicacion:"",
-    Identificacion:"",
-    NaturalezaObligacion:"",
-    Nombre:"",
-    UbicacionExpediente:"",
-    Obligacion:{
+    iniController();
+
+    function iniController(){
+        $scope.Nuevo = {
         Cuantia:"",
-        Deuda:"",
-        Estado:"",
-        FechaPreinscripcion:"",
-        TipoObligacionId:"",
-        Persona:{
-            Apellidos:"",
-            Direccion:"",
-            Identificacion:"",
-            Nombres:"",
-            Sexo:"",
-            Email:"",
-            Nacionalidad:"",
-            PaisNacimiento:"",
-            PaisCorrespondencia:"",
-            Departamento:"",
-            Municipio:"",
-            TipoPersonaId:"",
-            Telefono:"",
-            FechaNacimiento:"",
+        Descripcion:"",
+        DireccionEjecutado:"",
+        DireccionTituloEjecutivo:"",
+        EntidadEncargada:"",
+        FechaRadicacion:"",
+        Identificacion:"",
+        NaturalezaObligacion:"",
+        Nombre:"",
+        UbicacionExpediente:"",
+        Obligacion:{
+            Cuantia:"",
+            Deuda:"",
+            Estado:"",
+            FechaPreinscripcion:"",
+            TipoObligacionId:"",
+            Persona:{
+                Apellidos:"",
+                Direccion:"",
+                Identificacion:"",
+                Nombres:"",
+                Sexo:"",
+                Email:"",
+                Nacionalidad:"",
+                PaisNacimiento:"",
+                PaisCorrespondencia:"",
+                Departamento:"",
+                Municipio:"",
+                TipoPersonaId:"",
+                Telefono:"",
+                FechaNacimiento:"",
+            }
         }
+      };
     }
-  };
+
+	
 
   
 
@@ -81,7 +83,8 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
 
     MiServicio.Registar($scope.Nuevo,function(resp,msg) {
         if (resp) {
-            Materialize.toast(msg, 2000, 'green rounded',function(){window.location = "/#!/Secretaria/RegCartera/Paso1"});
+            Materialize.toast(msg, 2000, 'green rounded');
+            $location.path('/Secretaria/RegCartera');
         }else{
             Materialize.toast(msg, 3000, 'red rounded');
         }

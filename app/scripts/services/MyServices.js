@@ -10,11 +10,10 @@ App.service("MiServicio", function ($http) {
 
 		$http({
 			method: 'POST',
-			url: 'http://localhost:1876/api/expedientes',
+			url: URL_APIS.MiServicio.Registar,
 			data: $.param(Datos),
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).then(function(successCallback) {   
-			console.log(successCallback);
 			if (successCallback.data.filasAfectadas > 0 && !successCallback.data.error) {
 				callback(!successCallback.data.error,successCallback.data.mensaje);
         	}else{
@@ -27,24 +26,5 @@ App.service("MiServicio", function ($http) {
     });
 
 	}
-
-	// this.Registar = function(Datos,callback) {
-
-	// 	$http.post('api_registrar', Datos)
-	// 	.then(function (response) {
-	// 		console.log(response);
-	// 		if (response.status === 200 && response.data.FilasAfectadas > 0 && !response.data.Error) {
-
-	// 	        // execute callback with true to indicate successful login
-	// 	        callback(true,response.data.Mensaje);
-	// 	    }
-	// 	}, function(errorCallback){
-	// 		console.log(errorCallback);
-	// 		// if (errorCallback.status == 400) {
-	// 		// 	console.log(errorCallback);
-	// 		// 	callback(false,null,errorCallback.data.error_description);
-	// 		// }
-	// 	});
-	// }
 
 });
