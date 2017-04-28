@@ -15,7 +15,6 @@
 		  	</nav>
 		</div>
 		
-
 		<div class="row">
 			<div class="input-field">
 				<label>Tipo de Persona</label><br>
@@ -25,6 +24,7 @@
 				<label for="radioJuridica">Juridica</label>
 			</div>	
 		</div>
+
 		<div class="row">
 			<fieldset> <legend>Datos Personales</legend>
 				<!-- <div class="input-field col s2">
@@ -37,7 +37,7 @@
 				</div> -->
 
 				<div class="input-field col s4">
-					<input type="number" name="identificacion" id="inputidentificacion" ng-model="Nuevo.Obligacion.Persona.Identificacion" class="validate" pattern="[0-9]*">
+					<input type="number" name="identificacion" id="inputidentificacion" ng-model="Nuevo.Obligacion.Persona.Identificacion" class="validate" pattern="[0-9]*" >
 					<label for="inputidentificacion" data-error="Sólo Números" data-success="">Numero Documento</label>
 				</div>
 				<div class="input-field col s4">
@@ -74,8 +74,8 @@
 				</div> -->	
 
 				<div class="input-field col s3">
-					<input type="text" name="paisnacionalidad" id="inputPaisNac" ng-model="Nuevo.Obligacion.Persona.Nacionalidad" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="autocomplete validate">
-					<label for="inputPaisNac" data-error="Sólo Letras" data-success="">Nacionalidad</label>
+					<input type="text" name="paisnacionalidad" id="inputNac" ng-model="Nuevo.Obligacion.Persona.Nacionalidad" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="autocomplete validate">
+					<label for="inputNac" data-error="Sólo Letras" data-success="">Nacionalidad</label>
 				</div>
 			</fieldset>
 
@@ -142,8 +142,8 @@
 				</div>
 
 				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputDeuda" ng-model="Nuevo.DireccionTituloEjecutivo" class="validate">
-					<label for="inputDeuda">Dirección Título Ejecutivo</label>
+					<input type="text" name="municipio" id="inputDirTitEje" ng-model="Nuevo.DireccionTituloEjecutivo" class="validate">
+					<label for="inputDirTitEje">Dirección Título Ejecutivo</label>
 				</div>
 
 				<div class="input-field col s6">
@@ -171,14 +171,14 @@
 			<fieldset> <legend>Obligación</legend>
 
 				<div class="input-field col s6">
-					<input type="number" name="municipio" id="inputCuantia" ng-model="Nuevo.Obligacion.Cuantia" pattern="[0-9]*" class="validate">
-					<label for="inputCuantia" data-error="Sólo Números" data-success="">Cuantía</label>
+					<input type="number" name="municipio" id="inputDeuda" ng-model="Nuevo.Obligacion.Deuda" pattern="[0-9]*" class="validate">
+					<label for="inputDeuda" data-error="Sólo Números" data-success="">Deuda Y Cuantia</label>
 				</div>
 
-				<div class="input-field col s6">
-					<input type="number" name="municipio" id="inputDeuda" ng-model="Nuevo.Obligacion.Deuda" pattern="[0-9]*" class="validate">
-					<label for="inputDeuda" data-error="Sólo Números" data-success="">Deuda</label>
-				</div>
+				<!-- <div class="input-field col s6">
+					<input type="number" name="municipio" id="inputCuantia" ng-model="Nuevo.Obligacion.Deuda" pattern="[0-9]*" class="validate">
+					<label for="inputCuantia" data-error="Sólo Números" data-success="">Cuantía</label>
+				</div> -->
 
 				<div class="input-field col s6">
 					<input type="text" name="municipio" id="inputEstado" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" ng-model="Nuevo.Obligacion.Estado" class="validate">
@@ -200,5 +200,5 @@
 	</div>
 
 	<div class="row">
-		<button class="btn grey" ng-click="registar()">Registrar</button>
+		<button class="btn grey" id="btnreg" ng-click="registar()">Registrar</button>
 	</div>

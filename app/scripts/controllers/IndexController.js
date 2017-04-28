@@ -16,12 +16,14 @@ App.controller('IndexController', function ($scope, $location, AuthenticationSer
     }
 
 	$scope.CerrarSesion = function() {
+		$('.button-collapse').sideNav('hide');
 		AuthenticationService.Logout();
 		$location.path("/login");
 	}
 	
 	$scope.$on('$viewContentLoaded', function(){
 	    //Here your view content is fully loaded !!
+	    $(".button-collapse").sideNav({closeOnClick: true});
 	    $('select').material_select();
 		$('.datepicker').pickadate({
 		    selectMonths: true, // Creates a dropdown to control month

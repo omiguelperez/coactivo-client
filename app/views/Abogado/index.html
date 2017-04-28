@@ -1,4 +1,29 @@
-<nav class="light-blue darken-2"></nav>
+<nav class="brown lighten-2">
+  <a data-activates="mobile-demo" class="button-collapse hand_click"><i class="material-icons">menu</i></a>
+</nav>
+  <ul class="side-nav" id="mobile-demo">
+    <li>
+      <div class="userView">
+        <div class="background">
+          <img src="images/sidenavFondo.jpg">  
+        </div>
+        <span class="user"><img class="circle" src="images/sidenavFondo.jpg"></span>
+        <span>
+          <a href="#"><span class="name white-text">Sebastian</span></a>
+          <span class="email white-text">Abogado<br> sebasgonzales97@gmail.com</span>
+        </span>
+
+      </div>
+    </li>
+    <li><a ui-sref="Abogado.Radicar">Radicar</a></li>
+    <li><a ui-sref="Abogado.ConfirmarRadicacion">Confirmar Radicación</a></li>
+    <li><a ui-sref="Abogado.RadicacionMagnetica">Radicación Magnética</a></li>
+    <li><a ui-sref="Abogado.RadicarDocumento">Radicar documento</a></li>
+    <li><a ui-sref="Abogado.DocumentoConstancia">Editar documento radicado</a></li>
+    <li><a ui-sref="Abogado.EditarRadicarDocumento">Documento de constancia</a></li>
+    <li><a ng-click="CerrarSesion()" class="hand_click">Cerrar Sesión</a></li>
+  </ul>
+
   <ul class="side-nav fixed">
     <li>
       <div class="userView">
@@ -19,7 +44,7 @@
     <li><a ui-sref="Abogado.RadicarDocumento">Radicar documento</a></li>
     <li><a ui-sref="Abogado.DocumentoConstancia">Editar documento radicado</a></li>
     <li><a ui-sref="Abogado.EditarRadicarDocumento">Documento de constancia</a></li>
-    <li><a href="#!/close" ng-click="CerrarSesion()">Cerrar Sesión</a></li>
+    <li><a ng-click="CerrarSesion()" class="hand_click">Cerrar Sesión</a></li>
   </ul>
   
   <div class="row adaptar">
