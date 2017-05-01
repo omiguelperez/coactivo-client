@@ -7,26 +7,27 @@
 		<br><br>
 		<div class="row">
 			<nav>
-			    <div class="nav-wrapper grey">
-			      <div class="col s12">
-			        <a class="breadcrumb">Paso 1</a>
-			      </div>
-			    </div>
-		  	</nav>
-		</div>
-		
-		<div class="row">
-			<div class="input-field">
-				<label>Tipo de Persona</label><br>
-				<input type="radio" name="persona" id="radioNatural" value="1" ng-model="Nuevo.Obligacion.Persona.TipoPersonaId" class="with-gap">
-				<label for="radioNatural">Natural</label>
-				<input type="radio" name="persona" id="radioJuridica" value="2" ng-model="Nuevo.Obligacion.Persona.TipoPersonaId" class="with-gap">
-				<label for="radioJuridica">Juridica</label>
-			</div>	
+				<div class="nav-wrapper grey">
+					<div class="col s12">
+						<a class="breadcrumb">Paso 1</a>
+					</div>
+				</div>
+			</nav>
 		</div>
 
-		<div class="row">
-			<fieldset> <legend>Datos Personales</legend>
+		<form>
+			<div class="row">
+				<div class="input-field">
+					<label>Tipo de Persona</label><br>
+					<input type="radio" name="persona" id="radioNatural" value="1" ng-model="Nuevo.Obligacion.Persona.TipoPersonaId" class="with-gap">
+					<label for="radioNatural">Natural</label>
+					<input type="radio" name="persona" id="radioJuridica" value="2" ng-model="Nuevo.Obligacion.Persona.TipoPersonaId" class="with-gap">
+					<label for="radioJuridica">Juridica</label>
+				</div>	
+			</div>
+
+			<div class="row">
+				<fieldset> <legend>Datos Personales</legend>
 				<!-- <div class="input-field col s2">
 					<select id="cmbTipoId">
 						<option value="1-Cedula">Cedula</option>
@@ -132,11 +133,11 @@
 			<fieldset> <legend>Informacion adicional</legend>
 
 				<div class="input-field col s12">
-			      <textarea id="textarea1" class="materialize-textarea validate" ng-model="Nuevo.Descripcion"></textarea>
-			      <label for="textarea1">Descripción</label>
-			    </div>
+					<textarea id="textarea1" class="materialize-textarea validate" ng-model="Nuevo.Descripcion"></textarea>
+					<label for="textarea1">Descripción</label>
+				</div>
 
-			    <div class="input-field col s6">
+				<div class="input-field col s6">
 					<input type="text" name="municipio" id="inputDirEjecutado" ng-model="Nuevo.DireccionEjecutado" class="validate">
 					<label for="inputDirEjecutado">Dirección Ejecutado</label>
 				</div>
@@ -196,9 +197,11 @@
 				</div>
 
 			</fieldset>
-		</div>
+			<br>
+			<div class="row">
+				<input type="submit" class="btn grey" id="btnreg" ng-click="registar()" value="Registrar">
+			</div>
+		</form>
+		
 	</div>
-
-	<div class="row">
-		<button class="btn grey" id="btnreg" ng-click="registar()">Registrar</button>
-	</div>
+</div>

@@ -1,8 +1,10 @@
+var dominio = "http://localhost:1876";
+
 var URL_APIS = {
 	AuthenticationService:{
-		Login:"http://localhost:1876/oauth/token"
+		Login:dominio+"/oauth/token"
 	},
 	MiServicio:{
-		Registar:"http://localhost:1876/api/expedientes"
+		Registar:dominio+"/api/expedientes"
 	}
 }

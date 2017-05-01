@@ -7,15 +7,15 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('LoginController', function ($scope, $localStorage,$location, AuthenticationService) {
+App.controller('LoginController', function ($scope, $sessionStorage,$location, AuthenticationService) {
     $scope.username;
     $scope.password;
 
 	initController();
 
     function initController() {
-        if ($localStorage.currentUser) {
-            $location.path("/"+$localStorage.currentUser.username);
+        if ($sessionStorage.currentUser) {
+            $location.path("/"+$sessionStorage.currentUser.username);
         }
     };
 

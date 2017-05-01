@@ -1,4 +1,4 @@
-App.service('AuthenticationService', function($http, $localStorage) {
+App.service('AuthenticationService', function($http, $sessionStorage) {
 
    this.Login = function(username, password, callback) {
   
@@ -9,7 +9,7 @@ App.service('AuthenticationService', function($http, $localStorage) {
          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
      }).then(function(successCallback) {  
          if (successCallback.status == 200) {
-             $localStorage.currentUser = { username: successCallback.data.roles.split(";")[0], token: successCallback.data.access_token };
+             $sessionStorage.currentUser = { username: successCallback.data.roles.split(";")[0], token: successCallback.data.access_token };
              callback(true,successCallback.data.roles.split(";")[0]);//username);
          }
      }, function(errorCallback){
@@ -23,7 +23,7 @@ App.service('AuthenticationService', function($http, $localStorage) {
   this.SesionActiva = function() {
     var msg;
 
-    if ($localStorage.currentUser) {
+    if ($sessionStorage.currentUser) {
       msg=true;
     }else{
       msg=false;
@@ -34,6 +34,6 @@ App.service('AuthenticationService', function($http, $localStorage) {
 
 
   this.Logout = function() {
-   delete $localStorage.currentUser;
+   delete $sessionStorage.currentUser;
   }
 });
