@@ -28,83 +28,84 @@
 
   function iniController(){
     $scope.Nuevo = {
-        Cuantia:"",
-        Descripcion:"",
-        DireccionEjecutado:"",
-        DireccionTituloEjecutivo:"",
-        EntidadEncargada:"",
-        FechaRadicacion:"",
-        Identificacion:"",
-        NaturalezaObligacion:"",
-        Nombre:"",
-        UbicacionExpediente:"",
-        Obligacion:{
+        Cuantia:"", 
+        Deuda:"", 
+        Estado:"",
+        FechaPreinscripcion:"",
+        TipoObligacionId:"",      
+        Persona:{
+            Apellidos:"",
+            Direccion:"",
+            Identificacion:"",
+            Nombres:"",
+            Sexo:"",
+            Email:"",
+            Nacionalidad:"",
+            PaisNacimiento:"",
+            PaisCorrespondencia:"",
+            Departamento:"",
+            Municipio:"",
+            TipoPersonaId:"",
+            Telefono:"",
+            FechaNacimiento:"",
+        },
+        Expediente:{
             Cuantia:"",
-            Deuda:"",
-            Estado:"",
-            FechaPreinscripcion:"",
-            TipoObligacionId:"",
-            Persona:{
-                Apellidos:"",
-                Direccion:"",
-                Identificacion:"",
-                Nombres:"",
-                Sexo:"",
-                Email:"",
-                Nacionalidad:"",
-                PaisNacimiento:"",
-                PaisCorrespondencia:"",
-                Departamento:"",
-                Municipio:"",
-                TipoPersonaId:"",
-                Telefono:"",
-                FechaNacimiento:"",
-            }
+            Descripcion:"",
+            DireccionEjecutado:"",
+            DireccionTituloEjecutivo:"",
+            EntidadEncargada:"",
+            FechaRadicacion:"",
+            Identificacion:"",
+            NaturalezaObligacion:"",
+            Nombre:"",
+            UbicacionExpediente:""
         }
     };
 }
 
 $scope.registar = function() {
 
-    $scope.Nuevo.Cuantia = $scope.Nuevo.Obligacion.Deuda;
-    $scope.Nuevo.Obligacion.Cuantia = $scope.Nuevo.Obligacion.Deuda;
-    $scope.Nuevo.Obligacion.Persona.Sexo = $("#cmbSexo").val();
-    $scope.Nuevo.Identificacion = $scope.Nuevo.Obligacion.Persona.Identificacion;
-    $scope.Nuevo.Nombre = $scope.Nuevo.Obligacion.Persona.Nombres;
-    $scope.Nuevo.Obligacion.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
-    
-    $scope.Nuevo.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
+    $scope.Nuevo.Cuantia = $scope.Nuevo.Deuda;
+    $scope.Nuevo.Expediente.Cuantia = $scope.Nuevo.Deuda;
+    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
+    $scope.Nuevo.Expediente.Identificacion = $scope.Nuevo.Persona.Identificacion;
+    $scope.Nuevo.Expediente.Nombre = $scope.Nuevo.Persona.Nombres;
 
-    $scope.Nuevo.Obligacion.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
     
-    console.log($scope.Nuevo);
+    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
 
-    var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Obligacion.Persona.TipoPersonaId},
-    {id:"inputidentificacion",value:$scope.Nuevo.Obligacion.Persona.Identificacion},
-    {id:"inputNombres",value:$scope.Nuevo.Obligacion.Persona.Nombres},
-    {id:"inputpApellido",value:$scope.Nuevo.Obligacion.Persona.Apellidos},
-    {id:"inputNac",value:$scope.Nuevo.Obligacion.Persona.Sexo},
-    {id:"inputNac",value:$scope.Nuevo.Obligacion.Persona.Nacionalidad},
-    {id:"inputNacimiento",value:$scope.Nuevo.Obligacion.Persona.FechaNacimiento},
-    {id:"inputPaisNaci",value:$scope.Nuevo.Obligacion.Persona.PaisNacimiento},
-    {id:"inputDepartamentoNaci",value:$scope.Nuevo.Obligacion.Persona.Departamento},
-    {id:"inputMunicipioNaci",value:$scope.Nuevo.Obligacion.Persona.Municipio},
-    {id:"inputDireccion",value:$scope.Nuevo.Obligacion.Persona.Direccion},
-    {id:"inputPaisCorr",value:$scope.Nuevo.Obligacion.Persona.PaisCorrespondencia},
-    {id:"inputTelefonoCorr",value:$scope.Nuevo.Obligacion.Persona.Telefono},
-    {id:"inputEmailCorr",value:$scope.Nuevo.Obligacion.Persona.Email},
-    {id:"textarea1",value:$scope.Nuevo.Descripcion},
-    {id:"inputDirEjecutado",value:$scope.Nuevo.DireccionEjecutado},
-    {id:"inputDirTitEje",value:$scope.Nuevo.DireccionTituloEjecutivo},
-    {id:"inputEntEncar",value:$scope.Nuevo.EntidadEncargada},
-    {id:"inputFechaRadi",value:$scope.Nuevo.FechaRadicacion},
-    {id:"inputNatObliga",value:$scope.Nuevo.NaturalezaObligacion},
-    {id:"inputUbicaExped",value:$scope.Nuevo.UbicacionExpediente},
-    {id:"inputDeuda",value:$scope.Nuevo.Obligacion.Deuda},
-    {id:"inputEstado",value:$scope.Nuevo.Obligacion.Estado},
-    {id:"inputFechaPreins",value:$scope.Nuevo.Obligacion.FechaPreinscripcion},
-    {id:"inputTipoObliga",value:$scope.Nuevo.Obligacion.TipoObligacionId}];
+    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+    
+    var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
+    {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
+    {id:"inputNombres",value:$scope.Nuevo.Persona.Nombres},
+    {id:"inputpApellido",value:$scope.Nuevo.Persona.Apellidos},
+    {id:"inputNac",value:$scope.Nuevo.Persona.Sexo},
+    {id:"inputNac",value:$scope.Nuevo.Persona.Nacionalidad},
+    {id:"inputNacimiento",value:$scope.Nuevo.Persona.FechaNacimiento},
+    {id:"inputPaisNaci",value:$scope.Nuevo.Persona.PaisNacimiento},
+    {id:"inputDepartamentoNaci",value:$scope.Nuevo.Persona.Departamento},
+    {id:"inputMunicipioNaci",value:$scope.Nuevo.Persona.Municipio},
+    {id:"inputDireccion",value:$scope.Nuevo.Persona.Direccion},
+    {id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
+    {id:"inputTelefonoCorr",value:$scope.Nuevo.Persona.Telefono},
+    {id:"inputEmailCorr",value:$scope.Nuevo.Persona.Email},
+    {id:"textarea1",value:$scope.Nuevo.Expediente.Descripcion},
+    {id:"inputDirEjecutado",value:$scope.Nuevo.Expediente.DireccionEjecutado},
+    {id:"inputDirTitEje",value:$scope.Nuevo.Expediente.DireccionTituloEjecutivo},
+    {id:"inputEntEncar",value:$scope.Nuevo.Expediente.EntidadEncargada},
+    {id:"inputFechaRadi",value:$scope.Nuevo.Expediente.FechaRadicacion},
+    {id:"inputNatObliga",value:$scope.Nuevo.Expediente.NaturalezaObligacion},
+    {id:"inputUbicaExped",value:$scope.Nuevo.Expediente.UbicacionExpediente},
+    {id:"inputDeuda",value:$scope.Nuevo.Deuda},
+    {id:"inputEstado",value:$scope.Nuevo.Estado},
+    {id:"inputFechaPreins",value:$scope.Nuevo.FechaPreinscripcion},
+    {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
+
     var resp = Validaciones.nulos(arrayValidate);
+    
     if (!resp.status) {
         Mensaje(resp.msg,3000,'red rounded',resp.id);
     }else{
@@ -116,7 +117,6 @@ $scope.registar = function() {
             if (!resp.status) {
                 Mensaje(resp.msg,3000,'red rounded',resp.id);
             }else{
-                console.log('entro');
                 MiServicio.Registar($scope.Nuevo,function(resp_,msg) {
                     if (resp_) {
                         Mensaje(msg,3000,'green rounded');
