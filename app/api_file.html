@@ -37,8 +37,9 @@
 	</select>
 	<input id="input-700" name="kartik-input-700[]" type="file" multiple class="file-loading">
 	<script>
+	var idtipodocumento=1;
 	$(document).ready(function(){
-		var idtipodocumento=1;
+		
 	$("#TipoDocumento").change(function(){
 		console.log($(this).val());
 		idtipodocumento=$(this).val();
@@ -48,6 +49,16 @@
 	    uploadAsync: true,
 	    maxFileCount: 1,
 	    language: "es",
+	    initialPreview: [
+	        "http://localhost:1876/api/documentos/1",
+	        "http://localhost:1876/api/documentos/2"
+	    ],
+	    initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+	    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+	    initialPreviewConfig: [
+	        {caption: "People-1.jpg", size: 576237, width: "120px"}, //url: "/site/file-delete", key: 1},
+	        {caption: "People-2.jpg", size: 932882, width: "120px" },//url: "/site/file-delete", key: 2}, 
+	    ],
 	    uploadExtraData:{
 	    	TipoDocumentoId:idtipodocumento,// nose porque esa mierda no actualiza la caga esa MIRAS LA FORMA SEBAS DE PONER EL ID DEL TIPO DE DOCUMENTO AQUI POR DEFECTO MANDARE 1
 	    	ExpedienteId:1,

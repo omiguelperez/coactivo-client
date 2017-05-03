@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
- App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones) {
+ App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData) {
 
   $('input.autocomplete').autocomplete({
       data: {
@@ -23,10 +23,8 @@
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
 
-  iniController();
-
-
-  function iniController(){
+function iniController(){
+    $scope.NumeroExpediente="5";
     $scope.Nuevo = {
         Cuantia:"", 
         Deuda:"", 
@@ -63,6 +61,26 @@
         }
     };
 }
+
+function ObternerObligaciones() {
+    MiServicio.ObtenerExpedientes(function(datos) {
+        $scope.listadoExpedientes = datos;
+    });
+}
+
+$scope.GestionarDocumentosSecretaria=function(dato) {
+    //console.log(dato.expedienteId);
+    TemporalData.vaciar();
+    TemporalData.almacenar(dato);
+    //alert($scope.NumeroExpediente);
+}
+
+$scope.Mostrar = function() {
+    console.log(TemporalData);
+    $scope.datos = TemporalData.array[0];
+}
+  iniController();
+  ObternerObligaciones();
 
 $scope.registar = function() {
 
@@ -139,5 +157,6 @@ function Mensaje(msg,time,style,id) {
     $("#"+id).focus();
     Materialize.toast(msg, time, style);
 }
+
 
 });

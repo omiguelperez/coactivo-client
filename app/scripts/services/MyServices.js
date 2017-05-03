@@ -27,4 +27,19 @@ App.service("MiServicio", function ($http) {
 
 	}
 
+	this.ObtenerExpedientes = function(callback) {
+		
+		$http({
+			method: 'GET',
+			url: URL_APIS.MiServicio.ObtenerExpedientes,
+			data: $.param(""),
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).then(function(successCallback) {   
+			callback(successCallback.data);
+		}, function(errorCallback){
+			
+		});
+
+	}
+
 });

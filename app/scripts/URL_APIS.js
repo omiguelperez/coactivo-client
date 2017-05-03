@@ -5,6 +5,7 @@ var URL_APIS = {
 		Login:dominio+"/oauth/token"
 	},
 	MiServicio:{
-		Registar:dominio+"/api/obligaciones"
+		Registar:dominio+"/api/obligaciones",
+		ObtenerExpedientes:dominio+"/api/obligaciones"
 	}
 }
