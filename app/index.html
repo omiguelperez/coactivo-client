@@ -1,6 +1,6 @@
 <!doctype html>
-<!-- <html class="no-js" ng-app="serverApp"> -->
-<html class="no-js" >
+<html class="no-js" ng-app="serverApp">
+<!-- <html class="no-js" > -->
 <head>
   <meta charset="utf-8">
   <title>Cobro Coactivo</title>
@@ -23,7 +23,7 @@
 </head>
 <body ng-app="desktopApp">
 
-<div ui-view></div>
+  <div ui-view></div>
 
   <!--  -->
 
@@ -53,45 +53,40 @@
  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
  <!-- endbower -->
  <!-- endbuild -->
- <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script> -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
- <!-- <script src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js></script> -->
+ <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
  
  <!-- build:js({.tmp,app}) scripts/scripts.js -->
  <script src="scripts/app.js"></script>
+
+ <!-- <script src="scripts/URL_APIS.js"></script> -->
+  <script src="scripts/URL_APIS_FAKE.js"></script>
+
  <script src="scripts/routes/routes.js"></script>
 
-
  <script src="scripts/services/AuthenticationService.js"></script>
- <script src="scripts/factory/Fecha_Material_BD.Factory.js"></script>
-
- <!-- <script src="scripts/routes/contactos.js"></script> -->
-
- <!-- <script src="scripts/services/ContactosService.js"></script> -->
  <script src="scripts/services/MyServices.js"></script>
 
-  
-  <!--  <script src="scripts/controllers/main.js"></script>
-   <script src="scripts/controllers/about.js"></script>
-   <script src="scripts/controllers/contactos.js"></script> -->
-   <script src="scripts/controllers/IndexController.js"></script>
-   <script src="scripts/controllers/LoginController.js"></script>
-   <script src="scripts/controllers/ConfirmRadicaController.js"></script>
-   <script src="scripts/controllers/RadicaMagneticaController.js"></script>
-   <script src="scripts/controllers/RadicarController.js"></script>
-   <script src="scripts/controllers/RegCarteraController.js"></script>
-   <script src="scripts/controllers/RadicarDocumentoController.js"></script>
-   <script src="scripts/controllers/DocumentoConstanciaController.js"></script>
-   <script src="scripts/controllers/EditarRadicarDocumentoController.js"></script>
-   <!-- endbuild -->
+ <script src="scripts/factory/Fecha_Material_BD.Factory.js"></script>
+ <script src="scripts/factory/Validaciones.Factory.js"></script>
+
+ <script src="scripts/controllers/IndexController.js"></script>
+ <script src="scripts/controllers/LoginController.js"></script>
+ <script src="scripts/controllers/ConfirmRadicaController.js"></script>
+ <script src="scripts/controllers/RadicaMagneticaController.js"></script>
+ <script src="scripts/controllers/RadicarController.js"></script>
+ <script src="scripts/controllers/RegCarteraController.js"></script>
+ <script src="scripts/controllers/RadicarDocumentoController.js"></script>
+ <script src="scripts/controllers/DocumentoConstanciaController.js"></script>
+ <script src="scripts/controllers/EditarRadicarDocumentoController.js"></script>
+ <!-- endbuild -->
 
 
 
-<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-mocks.js"></script>
-<script src="scripts/server-temp/fake-backend.js"></script> -->
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-mocks.js"></script>
+ <script src="scripts/server-temp/fake-backend.js"></script>
 
-   <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
-   <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
- </body>
- </html>
+ <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
+ <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
+</body>
+</html>
