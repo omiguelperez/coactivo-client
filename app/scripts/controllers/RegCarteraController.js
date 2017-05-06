@@ -69,14 +69,13 @@ function ObternerObligaciones() {
 }
 
 $scope.GestionarDocumentosSecretaria=function(dato) {
-    //console.log(dato.expedienteId);
     TemporalData.vaciar();
     TemporalData.almacenar(dato);
-    //alert($scope.NumeroExpediente);
 }
 
 $scope.Mostrar = function() {
-    console.log(TemporalData);
+    var url_= encodeURI("api_file.html?values="+JSON.stringify(TemporalData.array[0]));
+    $('#iframeDoc').attr('src', url_);
     $scope.datos = TemporalData.array[0];
 }
   iniController();

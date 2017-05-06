@@ -3,6 +3,7 @@ var URL_APIS = {
 		Login:"/api"
 	},
 	MiServicio:{
-		Registar:"/api_registrar"
+		Registar:"/api_registrar",
+		ObtenerExpedientes:"/api/GETobligaciones"
 	}
 }

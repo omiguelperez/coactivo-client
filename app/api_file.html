@@ -4,7 +4,8 @@
 <head>
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="bower_components/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/
+	jquery.min.js"></script>
 	<!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
 	     This must be loaded before fileinput.min.js -->
 	<script src="bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
@@ -30,55 +31,128 @@
 </head>
 <body class="container">
 	<h4>Seleccione El Tipo de Documento al que se le asociara</h4>
-	<p>puse que subiera uno por uno para que puediera escoger el tipo de documento que es</p>
-	<select id="TipoDocumento">
-		<option value="1">Tipo 1</option>
-		<option value="2">Tipo 2</option>
-	</select>
+	<p>Nota: Suba uno por uno para que pueda escoger el tipo de documento que le corresponde</p>
+	<div class="row form-group">
+		<div class="col-xs-12">
+			<select id="TipoDocumento" class="form-control">
+				<option value="1">Tipo 1</option>
+				<option value="2">Tipo 2</option>
+			</select>
+		</div>
+		
+	</div>
+	
+	<div class="row form-group">
+	<div class="col-xs-4">
+		<label for="date1">Fecha Recepción</label>
+		<input type="date" class="form-control" id="date1">
+	</div>
+	<div class="col-xs-4">
+		<label for="date2">Fecha Documento</label>
+		<input type="date" class="form-control" id="date2">
+	</div>
+	<div class="col-xs-4">
+		<label for="date3">Fecha Entrega</label>
+		<input type="date" class="form-control" id="date3">
+	</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-xs-6">
+			<label for="txt1">Oficina de Origen</label>
+			<input type="text" class="form-control" id="txt1">
+		</div>
+		<div class="col-xs-6">
+			<label for="txt2">Remitente</label>
+			<input type="text" class="form-control" id="txt2">
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-xs-6">
+			<label for="txt3">Entrega Funcionario</label>
+			<input type="text" class="form-control" id="txt3">
+		</div>
+		<div class="col-xs-6">
+			<label for="txt4">Recibe Funcionario</label>
+			<input type="text" class="form-control" id="txt4">
+		</div>
+	</div>
 	<input id="input-700" name="kartik-input-700[]" type="file" multiple class="file-loading">
 	<script>
-	var idtipodocumento=1;
+	
+	var json_upload;
 	$(document).ready(function(){
-		
-	$("#TipoDocumento").change(function(){
-		console.log($(this).val());
-		idtipodocumento=$(this).val();
-	});
-	$("#input-700").fileinput({
+
+	var url = window.location.search.substring(1); //get rid of "?" in querystring
+    url = decodeURI(url);
+
+    if(url.split('=')[1] === "undefined"){
+    	window.location = "/api_errorData.html";
+    }else{
+    	var Json = JSON.parse(url.split('=')[1]); 
+   		console.log(Json);
+    };
+    
+
+	json_upload = {
 	    uploadUrl: "http://localhost:1876/api/documentos/create", // server upload action
+	    // uploadUrl: "http://localhost/html/server.php", // server upload action
 	    uploadAsync: true,
 	    maxFileCount: 1,
 	    language: "es",
-	    initialPreview: [
-	        "http://localhost:1876/api/documentos/1",
-	        "http://localhost:1876/api/documentos/2"
-	    ],
+	    // initialPreview: [
+	    //     "http://localhost:1876/api/documentos/1",
+	    //     "http://localhost:1876/api/documentos/2"
+	    // ],
 	    initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
 	    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
-	    initialPreviewConfig: [
-	        {caption: "People-1.jpg", size: 576237, width: "120px"}, //url: "/site/file-delete", key: 1},
-	        {caption: "People-2.jpg", size: 932882, width: "120px" },//url: "/site/file-delete", key: 2}, 
-	    ],
-	    uploadExtraData:{
-	    	TipoDocumentoId:idtipodocumento,// nose porque esa mierda no actualiza la caga esa MIRAS LA FORMA SEBAS DE PONER EL ID DEL TIPO DE DOCUMENTO AQUI POR DEFECTO MANDARE 1
-	    	ExpedienteId:1,
-	    	FechaRecepcion:"2017-03-09",
-	    	FechaDocumento:"2017-03-09",
-	    	OficinaOrigen:"mi casa",
-	    	Remitente:"anibal",
-	    	FuncionarioEntrega:"anibal",
-	    	FechaEntrega:"2017-03-09",
-	    	FuncionarioRecibe:"miguel",
-	    	FechaRadicacion:"2017-03-09",
+	    // initialPreviewConfig: [
+	    //     {caption: "People-1.jpg", size: 576237, width: "120px"}, //url: "/site/file-delete", key: 1},
+	    //     {caption: "People-2.jpg", size: 932882, width: "120px" },//url: "/site/file-delete", key: 2}, 
+	    // ],
+	    uploadExtraData:function() {
+            return {
+                TipoDocumentoId: document.getElementById('TipoDocumento').value,
+                ExpedienteId:Json.expedienteId,
+		    	FechaRecepcion:$("#date1").val(),
+		    	FechaDocumento:$("#date2").val(),
+		    	OficinaOrigen:$("#txt1").val(),
+		    	Remitente:$("#txt2").val(),
+		    	FuncionarioEntrega:$("#txt3").val(),
+		    	FechaEntrega:$("#date3").val(),
+		    	FuncionarioRecibe:$("#txt4").val(),
+		    	FechaRadicacion:Json.expediente.fechaRadicacion
+            };
+        }
+	    // uploadExtraData:{
+	    // 	TipoDocumentoId:"",
+	    // 	ExpedienteId:1,
+	    // 	FechaRecepcion:"2017-03-09",
+	    // 	FechaDocumento:"2017-03-09",
+	    // 	OficinaOrigen:"mi casa",
+	    // 	Remitente:"anibal",
+	    // 	FuncionarioEntrega:"anibal",
+	    // 	FechaEntrega:"2017-03-09",
+	    // 	FuncionarioRecibe:"miguel",
+	    // 	FechaRadicacion:"2017-03-09",
 	    	
-	    	//,[RutaDocumento] esta no porque esta se controla desde el servidor
-	    	//,[TipoArchivo] esta no porque esta se controla desde el servidor
-	    	//el resto se controla desde el servifdor
-	    }
-	});
+	    // 	//,[RutaDocumento] esta no porque esta se controla desde el servidor
+	    // 	//,[TipoArchivo] esta no porque esta se controla desde el servidor
+	    // 	//el resto se controla desde el servifdor
+	    // }
+	};
+  
+	// $("#TipoDocumento").change(function(){
+	// 	console.log(json_upload);
+	// });
+
+	$("#input-700").fileinput(json_upload);
+
 	$.ajax({
         type: 'get',
         url:"http://localhost:1876/api/tiposdocumentos",
+        // url:"http://localhost/html/serverDoc.php",
         dataType:"json",
         //data:{"fechaactual":"juab"},
         success: function(Respuesta){
