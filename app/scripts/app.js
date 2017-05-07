@@ -11,28 +11,29 @@
 
  var App = angular.module('desktopApp', [
   'ngRoute',
-  'ngAnimate',
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngTouch',
+  // 'ngAnimate',
+  // 'ngCookies',
+  // 'ngResource',
+  // 'ngSanitize',
+  // 'ngTouch',
   'ui.router',
-  'ngMessages',
+  // 'ngMessages',
   'ngStorage'
   ]);
 
- App.run(function($rootScope, $http, $location, $localStorage) {
+ App.run(function($rootScope, $http, $location, $sessionStorage) {
 
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-      var publicPages = ['#!/login'];
-      var restrictedPage = publicPages.indexOf(window.location.hash) === -1;
-      console.log(restrictedPage +" "+ $localStorage.currentUser !== null);
-      if (restrictedPage && !$localStorage.currentUser) {
-          $location.path('/login');
-      }else if(restrictedPage && $localStorage.currentUser !== null){
-          $location.path('/'+$localStorage.currentUser.username);
+  $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    var publicPages = ['#!/login'];
+    var restrictedPage = publicPages.indexOf(window.location.hash) === -1;
+    if (restrictedPage && $sessionStorage.currentUser === undefined) {
+      $location.path('/login');
+    }else if($sessionStorage.currentUser){
+      if((!restrictedPage && $sessionStorage.currentUser !== undefined)||!(window.location.hash.split("/")[1]=== $sessionStorage.currentUser.username)){
+        $location.path('/'+$sessionStorage.currentUser.username);
       }
-    });
-
-
+    }
   });
+
+
+});

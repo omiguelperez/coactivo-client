@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('RegCarteraController', function ($scope, $timeout, $route, MiServicio) {
+ App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData) {
 
   $('input.autocomplete').autocomplete({
       data: {
@@ -15,49 +15,147 @@ App.controller('RegCarteraController', function ($scope, $timeout, $route, MiSer
         "Estados Unidos": null,
         "España": null
           //"España": 'http://placehold.it/250x250'
-        },
+      },
         limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
         onAutocomplete: function(val) {
           // Callback function when value is autcompleted.
-        },
+      },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
-	
-	$scope.thumbnail = [];
-  // Read the image using the filereader 
-  $scope.fileReaderSupported = window.FileReader != null;
 
-	$scope.Nuevo = {};
-
-	$scope.registar = function() {
-		$scope.Nuevo.tipo_documento = $("#cmbTipoId").val();
-		$scope.Nuevo.sexo = $("#cmbSexo").val();
-		
-    $scope.msg = MiServicio.Registar($scope.Nuevo);
-
-    Materialize.toast($scope.msg.mensaje, 2000, $scope.msg.color,function(){if($scope.msg.estado){$route.reload()}});
-    
-    
-	}
-
-	$scope.photoChanged = function(files) {
-      if (files != null) {
-        var file = files[0];
-        if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
-          $timeout(function() {
-            var fileReader = new FileReader();
-            fileReader.readAsDataURL(file); // convert the image to data url. 
-            fileReader.onload = function(e) {
-              $timeout(function() {
-                $scope.thumbnail.dataUrl = e.target.result; // Retrieve the image. 	
-              });
-            }
-          });
+function iniController(){
+    $scope.NumeroExpediente="5";
+    $scope.Nuevo = {
+        Cuantia:"", 
+        Deuda:"", 
+        Estado:"",
+        FechaPreinscripcion:"",
+        TipoObligacionId:"",      
+        Persona:{
+            Apellidos:"",
+            Direccion:"",
+            Identificacion:"",
+            Nombres:"",
+            Sexo:"",
+            Email:"",
+            Nacionalidad:"",
+            PaisNacimiento:"",
+            PaisCorrespondencia:"",
+            Departamento:"",
+            Municipio:"",
+            TipoPersonaId:"",
+            Telefono:"",
+            FechaNacimiento:"",
+        },
+        Expediente:{
+            Cuantia:"",
+            Descripcion:"",
+            DireccionEjecutado:"",
+            DireccionTituloEjecutivo:"",
+            EntidadEncargada:"",
+            FechaRadicacion:"",
+            Identificacion:"",
+            NaturalezaObligacion:"",
+            Nombre:"",
+            UbicacionExpediente:""
         }
-      }
     };
+}
 
-    $scope.cambio = function(e) {
-    	$scope.Nuevo.File = URL.createObjectURL(e.target.files[0]);
+function ObternerObligaciones() {
+    MiServicio.ObtenerExpedientes(function(datos) {
+        $scope.listadoExpedientes = datos;
+    });
+}
+
+$scope.GestionarDocumentosSecretaria=function(dato) {
+    TemporalData.vaciar();
+    TemporalData.almacenar(dato);
+}
+
+$scope.Mostrar = function() {
+    var url_= encodeURI("api_file.html?values="+JSON.stringify(TemporalData.array[0]));
+    $('#iframeDoc').attr('src', url_);
+    $scope.datos = TemporalData.array[0];
+}
+  iniController();
+  ObternerObligaciones();
+
+$scope.registar = function() {
+
+    $scope.Nuevo.Cuantia = $scope.Nuevo.Deuda;
+    $scope.Nuevo.Expediente.Cuantia = $scope.Nuevo.Deuda;
+    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
+    $scope.Nuevo.Expediente.Identificacion = $scope.Nuevo.Persona.Identificacion;
+    $scope.Nuevo.Expediente.Nombre = $scope.Nuevo.Persona.Nombres;
+
+    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
+    
+    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
+
+    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+    
+    var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
+    {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
+    {id:"inputNombres",value:$scope.Nuevo.Persona.Nombres},
+    {id:"inputpApellido",value:$scope.Nuevo.Persona.Apellidos},
+    {id:"inputNac",value:$scope.Nuevo.Persona.Sexo},
+    {id:"inputNac",value:$scope.Nuevo.Persona.Nacionalidad},
+    {id:"inputNacimiento",value:$scope.Nuevo.Persona.FechaNacimiento},
+    {id:"inputPaisNaci",value:$scope.Nuevo.Persona.PaisNacimiento},
+    {id:"inputDepartamentoNaci",value:$scope.Nuevo.Persona.Departamento},
+    {id:"inputMunicipioNaci",value:$scope.Nuevo.Persona.Municipio},
+    {id:"inputDireccion",value:$scope.Nuevo.Persona.Direccion},
+    {id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
+    {id:"inputTelefonoCorr",value:$scope.Nuevo.Persona.Telefono},
+    {id:"inputEmailCorr",value:$scope.Nuevo.Persona.Email},
+    {id:"textarea1",value:$scope.Nuevo.Expediente.Descripcion},
+    {id:"inputDirEjecutado",value:$scope.Nuevo.Expediente.DireccionEjecutado},
+    {id:"inputDirTitEje",value:$scope.Nuevo.Expediente.DireccionTituloEjecutivo},
+    {id:"inputEntEncar",value:$scope.Nuevo.Expediente.EntidadEncargada},
+    {id:"inputFechaRadi",value:$scope.Nuevo.Expediente.FechaRadicacion},
+    {id:"inputNatObliga",value:$scope.Nuevo.Expediente.NaturalezaObligacion},
+    {id:"inputUbicaExped",value:$scope.Nuevo.Expediente.UbicacionExpediente},
+    {id:"inputDeuda",value:$scope.Nuevo.Deuda},
+    {id:"inputEstado",value:$scope.Nuevo.Estado},
+    {id:"inputFechaPreins",value:$scope.Nuevo.FechaPreinscripcion},
+    {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
+
+    var resp = Validaciones.nulos(arrayValidate);
+    
+    if (!resp.status) {
+        Mensaje(resp.msg,3000,'red rounded',resp.id);
+    }else{
+        resp = Validaciones.FechaNacimiento([arrayValidate[6]]);
+        if (!resp.status) {
+            Mensaje(resp.msg,3000,'red rounded',resp.id);
+        }else{
+            var resp = Validaciones.FechaLimite([arrayValidate[6],arrayValidate[18],arrayValidate[23]]);
+            if (!resp.status) {
+                Mensaje(resp.msg,3000,'red rounded',resp.id);
+            }else{
+                MiServicio.Registar($scope.Nuevo,function(resp_,msg) {
+                    if (resp_) {
+                        Mensaje(msg,3000,'green rounded');
+                        $location.path('/Secretaria/RegCartera');
+                    }else{
+                        Mensaje(msg,3000,'red rounded');
+                    }
+                });
+            }
+        }
     }
+
+}
+
+function Mensaje(msg,time,style) {
+    Materialize.toast(msg, time, style);
+}
+
+function Mensaje(msg,time,style,id) {
+    $("#"+id).focus();
+    Materialize.toast(msg, time, style);
+}
+
+
 });
