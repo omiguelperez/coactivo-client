@@ -4,6 +4,7 @@ var URL_APIS = {
 	},
 	MiServicio:{
 		Registar:"/api_registrar",
-		ObtenerExpedientes:"/api/GETobligaciones"
+		ObtenerExpedientes:"/api/GETobligaciones",
+		ObtenerTiposObligaciones:"/api/GETobligacionesTipos"
 	}
 }

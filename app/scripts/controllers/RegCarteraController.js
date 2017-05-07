@@ -28,7 +28,7 @@ function iniController(){
     $scope.Nuevo = {
         Cuantia:"", 
         Deuda:"", 
-        Estado:"",
+        Estado:"Pendiente",
         FechaPreinscripcion:"",
         TipoObligacionId:"",      
         Persona:{
@@ -68,6 +68,13 @@ function ObternerObligaciones() {
     });
 }
 
+function ObtenerTiposObligaciones() {
+    MiServicio.ObtenerTiposObligaciones(function(datos) {
+        $scope.listadoTiposObligaciones = datos;
+    });  
+    setTimeout(function() {$('select').material_select();}, 2000);
+}
+
 $scope.GestionarDocumentosSecretaria=function(dato) {
     TemporalData.vaciar();
     TemporalData.almacenar(dato);
@@ -80,6 +87,7 @@ $scope.Mostrar = function() {
 }
   iniController();
   ObternerObligaciones();
+  ObtenerTiposObligaciones();
 
 $scope.registar = function() {
 
@@ -94,6 +102,8 @@ $scope.registar = function() {
     $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
 
     $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+
+    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
     
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
@@ -134,6 +144,7 @@ $scope.registar = function() {
             if (!resp.status) {
                 Mensaje(resp.msg,3000,'red rounded',resp.id);
             }else{
+                console.log($scope.Nuevo);
                 MiServicio.Registar($scope.Nuevo,function(resp_,msg) {
                     if (resp_) {
                         Mensaje(msg,3000,'green rounded');

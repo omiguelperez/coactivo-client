@@ -6,6 +6,7 @@ angular
 function setupFakeBackend($httpBackend) {
     var testUser = { username: 'Abogado', password: 'Abogado', firstName: 'Test', lastName: 'User' };
     var testUser2 = { username: 'Secretaria', password: 'Secretaria', firstName: 'Test', lastName: 'User' };
+    var testUser3 = { username: 'Lider', password: 'Lider', firstName: 'Test', lastName: 'User' }
 
     $httpBackend.whenPOST('/api').respond(function (method, url, data) {
 
@@ -15,6 +16,8 @@ function setupFakeBackend($httpBackend) {
             return [200, { access_token: 'fake-jwt-token',roles:'Abogado;Abogado'}, {}];
         } else if((params.username === testUser2.username && params.password === testUser2.password)){
             return [200, { access_token: 'fake-jwt-token',roles:'Secretaria;Secretaria'}, {}];
+        } else if((params.username === testUser3.username && params.password === testUser3.password)){
+            return [200, { access_token: 'fake-jwt-token',roles:'Lider;Lider'}, {}];
         }else{
             return [400, {error_description:"Usuario o contraseña incorrecta"}, {}];
         }
@@ -22,6 +25,33 @@ function setupFakeBackend($httpBackend) {
 
     $httpBackend.whenPOST('/api_registrar').respond(function (method, url, data) {
         return [200, {filasAfectadas:1, mensaje:"Guardado Correctamente",error:false}, {}];
+    });
+
+    $httpBackend.whenGET('/api/GETobligacionesTipos').respond(function (method, url, data) {
+        var json = [
+        {
+            "tipoObligacionId": 1,
+            "nombre": "Tipo Obligacion 1",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "tipoObligacionId": 2,
+            "nombre": "Tipo Obligacion 2",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "tipoObligacionId": 3,
+            "nombre": "Tipo Obligacion 3",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        }
+        ];
+        return [200, json, {}];
     });
 
     $httpBackend.whenGET('/api/GETobligaciones').respond(function (method, url, data) {

@@ -181,10 +181,10 @@
 					<label for="inputCuantia" data-error="Sólo Números" data-success="">Cuantía</label>
 				</div> -->
 
-				<div class="input-field col s6">
+				<!-- <div class="input-field col s6">
 					<input type="text" name="municipio" id="inputEstado" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" ng-model="Nuevo.Estado" class="validate">
 					<label for="inputEstado">Estado</label>
-				</div>
+				</div> -->
 
 				<div class="input-field col s6">
 					<input type="date" name="municipio" id="inputFechaPreins" class="datepicker">
@@ -192,8 +192,12 @@
 				</div>
 
 				<div class="input-field col s6">
-					<input type="number" name="municipio" id="inputTipoObliga" pattern="[0-9]*" ng-model="Nuevo.TipoObligacionId" class="validate">
-					<label for="inputTipoObliga">Tipo Obligación</label>
+					<!-- <input type="number" name="municipio" id="inputTipoObliga" pattern="[0-9]*" ng-model="Nuevo.TipoObligacionId" class="validate">
+					<label for="inputTipoObliga">Tipo Obligación</label> -->
+					<select id="cmbTipoObligacion">
+						<option ng-repeat="dato in listadoTiposObligaciones" value="{{dato.tipoObligacionId}}">{{dato.nombre}}</option>
+					</select>
+					<label for="cmbTipoObligacion">Tipo de Obligaciones</label>
 				</div>
 
 			</fieldset>

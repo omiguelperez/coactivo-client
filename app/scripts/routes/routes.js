@@ -10,6 +10,12 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
         controller: 'LoginController'
     })
 
+    .state('Lider', {
+        url: "/Lider",
+        templateUrl: "views/Lider/index.html",
+        controller: 'IndexController'
+    })
+
     .state('Abogado', {
         url: "/Abogado",
         templateUrl: "views/Abogado/index.html",

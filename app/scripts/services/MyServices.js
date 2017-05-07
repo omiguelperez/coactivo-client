@@ -42,4 +42,19 @@ App.service("MiServicio", function ($http) {
 
 	}
 
+	this.ObtenerTiposObligaciones = function(callback) {
+		
+		$http({
+			method: 'GET',
+			url: URL_APIS.MiServicio.ObtenerTiposObligaciones,
+			data: $.param(""),
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).then(function(successCallback) {   
+			callback(successCallback.data);
+		}, function(errorCallback){
+			
+		});
+
+	}
+
 });
