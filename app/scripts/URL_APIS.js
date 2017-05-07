@@ -7,6 +7,6 @@ var URL_APIS = {
 	MiServicio:{
 		Registar:dominio+"/api/obligaciones",
 		ObtenerExpedientes:dominio+"/api/obligaciones",
-		ObtenerTiposObligaciones:dominio+"aqui_falta_la_api"
+		ObtenerTiposObligaciones:dominio+"/api/tiposobligaciones"
 	}
 }

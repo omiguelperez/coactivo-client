@@ -9,7 +9,8 @@ App.service('AuthenticationService', function($http, $sessionStorage) {
          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
      }).then(function(successCallback) {  
          if (successCallback.status == 200) {
-             $sessionStorage.currentUser = { username: successCallback.data.roles.split(";")[0], token: successCallback.data.access_token };
+             console.log(successCallback.data.persona);
+             $sessionStorage.currentUser = { rolename: successCallback.data.roles.split(";")[0], token: successCallback.data.access_token,persona:successCallback.data.persona };
              callback(true,successCallback.data.roles.split(";")[0]);//username);
          }
      }, function(errorCallback){

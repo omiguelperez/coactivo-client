@@ -7,13 +7,17 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
-App.controller('IndexController', function ($scope, $location, AuthenticationService) {
+App.controller('IndexController', function ($scope, $location, AuthenticationService,$sessionStorage) {
 
 	initController();
 
 	function initController() {
-
-    }
+            var datosbasicos=JSON.parse($sessionStorage.currentUser.persona);
+            //datosbasicos.push({"rol":"ss"});
+            datosbasicos['Rol'] = $sessionStorage.currentUser.rolename;
+            //console.log(datosbasicos);
+            $scope.DatosBasicos=datosbasicos;
+        }
 
 	$scope.CerrarSesion = function() {
 		$('.button-collapse').sideNav('hide');

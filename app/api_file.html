@@ -74,7 +74,7 @@
 		</div>
 		<div class="col-xs-6">
 			<label for="txt4">Recibe Funcionario</label>
-                        <input type="text" class="form-control" id="txt4">
+                        <input type="text" readonly="true" class="form-control" id="txt4">
 		</div>
 	</div>
 	<input id="input-700" name="kartik-input-700[]" type="file" multiple class="file-loading">
@@ -85,13 +85,15 @@
 
             var url = window.location.search.substring(1); //get rid of "?" in querystring
             url = decodeURI(url);
-
-            if(url.split('=')[1] === "undefined"){
+            var primeraparte=url.split('&')[0];
+            var segundaparte=url.split('&')[1];
+            if(primeraparte.split('=')[1] === "undefined" || segundaparte.split("=")[1]==="undefined"){
                 window.location = "/api_errorData.html";
             }else{
-                var Json = JSON.parse(url.split('=')[1]); 
-                        console.log(Json);
-                        ConsultarDocumentos(Json.expedienteId)
+                var Json = JSON.parse(primeraparte.split('=')[1]); 
+                var DatosSecretaria = JSON.parse(segundaparte.split('=')[1]); 
+                $("#txt4").val(DatosSecretaria.Nombres +" "+ DatosSecretaria.Apellidos);
+                ConsultarDocumentos(Json.expedienteId)
             };
     
 
@@ -189,7 +191,7 @@
                                 }
                             }   
                         }
-                        console.log(json_upload);
+                        //console.log(json_upload);
                         $("#input-700").fileinput(json_upload);
                     }
                 });

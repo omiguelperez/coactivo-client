@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
- App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData) {
+ App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
 
   $('input.autocomplete').autocomplete({
       data: {
@@ -81,7 +81,10 @@ $scope.GestionarDocumentosSecretaria=function(dato) {
 }
 
 $scope.Mostrar = function() {
-    var url_= encodeURI("api_file.html?values="+JSON.stringify(TemporalData.array[0]));
+    //el simbolo # genera pronblemas
+    var aux=$sessionStorage.currentUser.persona+"";
+    aux=aux.split("#")[0]+aux.split("#")[1];
+    var url_= encodeURI("api_file.html?values="+JSON.stringify(TemporalData.array[0])+"&Secretaria="+aux);
     $('#iframeDoc').attr('src', url_);
     $scope.datos = TemporalData.array[0];
 }

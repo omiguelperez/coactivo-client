@@ -15,7 +15,7 @@ App.controller('LoginController', function ($scope, $sessionStorage,$location, A
 
     function initController() {
         if ($sessionStorage.currentUser) {
-            $location.path("/"+$sessionStorage.currentUser.username);
+            $location.path("/"+$sessionStorage.currentUser.rolename);
         }
     };
 
