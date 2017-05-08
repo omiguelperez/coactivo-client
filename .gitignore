@@ -24,3 +24,4 @@ npm-debug.log
 *.log
 *.stackdump
 .tmp/
+/nbproject/

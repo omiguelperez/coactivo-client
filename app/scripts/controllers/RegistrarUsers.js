@@ -7,23 +7,9 @@
  * # MainCtrl
  * Controller of the desktopApp
  */
- App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
+ App.controller('RegistrarUsers', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
 
-
-  $('input.autocomplete').autocomplete({
-      data: {
-        "Colombia": null,
-        "Estados Unidos": null,
-        "España": null
-          //"España": 'http://placehold.it/250x250'
-      },
-        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function(val) {
-          // Callback function when value is autcompleted.
-      },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    });
-$('#cmbNacionalidad').change(function(){
+    $('#cmbNacionalidad').change(function(){
         var pais=$.trim($("#cmbNacionalidad option:selected").text());
         $("#inputNac").val(pais);
         $scope.Nuevo.Persona.Nacionalidad=pais;
@@ -55,13 +41,13 @@ $('#cmbNacionalidad').change(function(){
         Materialize.updateTextFields();
     });
 function iniController(){
+    $("#Cargando").hide();
     $scope.NumeroExpediente="5";
-    $scope.Nuevo = {
-        Cuantia:"", 
-        Deuda:"", 
-        Estado:"Pendiente",
-        FechaPreinscripcion:"",
-        TipoObligacionId:"",      
+    ReiniciarCampos();
+}
+
+function ReiniciarCampos(){
+    $scope.Nuevo = {    
         Persona:{
             Apellidos:"",
             Direccion:"",
@@ -79,20 +65,21 @@ function iniController(){
             TipoPersonaId: 1,
             Telefono:"",
         },
-        Expediente:{
-            Cuantia:"",
-            Descripcion:"",
-            DireccionEjecutado:"",
-            DireccionTituloEjecutivo:"",
-            EntidadEncargada:"",
-            FechaRadicacion:"",
-            Identificacion:"",
-            NaturalezaObligacion:"",
-            Nombre:"",
-            UbicacionExpediente:""
+        "CreateUserBindingModel":{ 
+            UserName:"", 
+            Password: "", 
+            ConfirmPassword: "", 
+            RoleName:""
         }
     };
 }
+function ObtenerRolesPorLiderAbogado() {
+    MiServicio.ObtenerRolesByLider(function(datos) {
+        $scope.listadoRoles = datos;
+    });
+    setTimeout(function() {$('select').material_select();}, 1500);
+}
+
 function ObtenerPaises() {
     MiServicio.ObtenerPaises(function(datos) {
         ObtenerDepartamentosPorPais(datos[0].paisId);
@@ -124,19 +111,6 @@ function ObtenerMunicipiosPorDepartamento(IdDepartamento) {
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
-function ObternerObligaciones() {
-    MiServicio.ObtenerExpedientes(function(datos) {
-        $scope.listadoExpedientes = datos;
-    });
-}
-
-function ObtenerTiposObligaciones() {
-    MiServicio.ObtenerTiposObligaciones(function(datos) {
-        $scope.listadoTiposObligaciones = datos;
-    });  
-    setTimeout(function() {$('select').material_select();}, 2000);
-}
-
 $scope.GestionarDocumentosSecretaria=function(dato) {
     TemporalData.vaciar();
     TemporalData.almacenar(dato);
@@ -151,78 +125,63 @@ $scope.Mostrar = function() {
     $scope.datos = TemporalData.array[0];
 }
   iniController();
-  ObternerObligaciones();
-  ObtenerTiposObligaciones();
+  ObtenerRolesPorLiderAbogado();
   ObtenerPaises();
 
-$scope.registar = function() {
+$scope.clickRegistrarUsuario = function() {
 
-    $scope.Nuevo.Cuantia = $scope.Nuevo.Deuda;
-    $scope.Nuevo.Expediente.Cuantia = $scope.Nuevo.Deuda;
     $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
-    $scope.Nuevo.Expediente.Identificacion = $scope.Nuevo.Persona.Identificacion;
-    $scope.Nuevo.Expediente.Nombre = $scope.Nuevo.Persona.Nombres;
-
-    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
-    
-    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
-
+    $scope.Nuevo.CreateUserBindingModel.RoleName = $("#cmbRol").val();
+    $scope.Nuevo.Persona.MunicipioId=$("#cmbMunicipio").val();
+    $scope.Nuevo.Persona.PaisId=$("#cmbPaisNacimiento").val();
     $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
-
-    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
-    
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
     {id:"inputNombres",value:$scope.Nuevo.Persona.Nombres},
     {id:"inputpApellido",value:$scope.Nuevo.Persona.Apellidos},
-    //{id:"inputNac",value:$scope.Nuevo.Persona.Sexo},
+    {id:"cmbSexo",value:$scope.Nuevo.Persona.Sexo},
     //{id:"inputNac",value:$scope.Nuevo.Persona.Nacionalidad},
     {id:"inputNacimiento",value:$scope.Nuevo.Persona.FechaNacimiento},
     //{id:"inputPaisNaci",value:$scope.Nuevo.Persona.PaisNacimiento},
     //{id:"inputDepartamentoNaci",value:$scope.Nuevo.Persona.Departamento},
     //{id:"inputMunicipioNaci",value:$scope.Nuevo.Persona.Municipio},
     {id:"inputDireccion",value:$scope.Nuevo.Persona.Direccion},
-    {id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
+    //{id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
     {id:"inputTelefonoCorr",value:$scope.Nuevo.Persona.Telefono},
     {id:"inputEmailCorr",value:$scope.Nuevo.Persona.Email},
-    {id:"textarea1",value:$scope.Nuevo.Expediente.Descripcion},
-    {id:"inputDirEjecutado",value:$scope.Nuevo.Expediente.DireccionEjecutado},
-    {id:"inputDirTitEje",value:$scope.Nuevo.Expediente.DireccionTituloEjecutivo},
-    {id:"inputEntEncar",value:$scope.Nuevo.Expediente.EntidadEncargada},
-    {id:"inputFechaRadi",value:$scope.Nuevo.Expediente.FechaRadicacion},
-    {id:"inputNatObliga",value:$scope.Nuevo.Expediente.NaturalezaObligacion},
-    {id:"inputUbicaExped",value:$scope.Nuevo.Expediente.UbicacionExpediente},
-    {id:"inputDeuda",value:$scope.Nuevo.Deuda},
-    {id:"inputEstado",value:$scope.Nuevo.Estado},
-    {id:"inputFechaPreins",value:$scope.Nuevo.FechaPreinscripcion},
-    {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
-
+    {id:"inputUsuario",value:$scope.Nuevo.CreateUserBindingModel.UserName},
+    {id:"inputPassword",value:$scope.Nuevo.CreateUserBindingModel.Password},
+    {id:"inputConfirmPassword",value:$scope.Nuevo.CreateUserBindingModel.ConfirmPassword}];
+    console.log(arrayValidate);
     var resp = Validaciones.nulos(arrayValidate);
-    
-    if (!resp.status) {
-        Mensaje(resp.msg,3000,'red rounded',resp.id);
+    if($scope.Nuevo.CreateUserBindingModel.Password!=$scope.Nuevo.CreateUserBindingModel.ConfirmPassword){
+        Mensaje("Verifique Contraseñas, No Coinciden",3000,'red rounded',resp.id);
     }else{
-        resp = Validaciones.FechaNacimiento([arrayValidate[4]]);
         if (!resp.status) {
             Mensaje(resp.msg,3000,'red rounded',resp.id);
         }else{
-            var resp = Validaciones.FechaLimite([arrayValidate[4],arrayValidate[13]]);
+            resp = Validaciones.FechaNacimiento([arrayValidate[5]]);
             if (!resp.status) {
                 Mensaje(resp.msg,3000,'red rounded',resp.id);
             }else{
-                console.log($scope.Nuevo);
-                MiServicio.Registar($scope.Nuevo,function(resp_,msg) {
-                    if (resp_) {
-                        Mensaje(msg,3000,'green rounded');
-                        $location.path('/Secretaria/RegCartera');
-                    }else{
-                        Mensaje(msg,3000,'red rounded');
-                    }
-                });
+                var resp = Validaciones.FechaLimite([arrayValidate[5]]);
+                if (!resp.status) {
+                    Mensaje(resp.msg,3000,'red rounded',resp.id);
+                }else{
+                    $("#Cargando").show();
+                    MiServicio.RegistrarUsuarioByLider($scope.Nuevo,function(resp_,msg) {
+                        $("#Cargando").hide();
+                        if (resp_) {
+                            Mensaje(msg,3000,'green rounded');
+                            ReiniciarCampos();
+                        }else{
+                            Mensaje(msg,3000,'red rounded');
+                        }
+                    });
+                }
             }
         }
     }
-
 }
 
 function Mensaje(msg,time,style) {

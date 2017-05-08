@@ -29,8 +29,8 @@
     if (restrictedPage && $sessionStorage.currentUser === undefined) {
       $location.path('/login');
     }else if($sessionStorage.currentUser){
-      if((!restrictedPage && $sessionStorage.currentUser !== undefined)||!(window.location.hash.split("/")[1]=== $sessionStorage.currentUser.username)){
-        $location.path('/'+$sessionStorage.currentUser.username);
+      if((!restrictedPage && $sessionStorage.currentUser !== undefined)||!(window.location.hash.split("/")[1]=== $sessionStorage.currentUser.rolename)){
+        $location.path('/'+$sessionStorage.currentUser.rolename);
       }
     }
   });

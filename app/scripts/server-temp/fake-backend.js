@@ -6,15 +6,33 @@ angular
 function setupFakeBackend($httpBackend) {
     var testUser = { username: 'Abogado', password: 'Abogado', firstName: 'Test', lastName: 'User' };
     var testUser2 = { username: 'Secretaria', password: 'Secretaria', firstName: 'Test', lastName: 'User' };
+    var testUser3 = { username: 'Lider', password: 'Lider', firstName: 'Test', lastName: 'User' }
 
     $httpBackend.whenPOST('/api').respond(function (method, url, data) {
 
         var params = converter(data);
 
+        var json = {
+            "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiJkMDRmOTIyMC01YmVmLTQ2ZTgtYmU0My1mMjhlMDg3ODA1ZDAiLCJ1bmlxdWVfbmFtZSI6InNlY3JldGFyaWEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2FjY2Vzc2NvbnRyb2xzZXJ2aWNlLzIwMTAvMDcvY2xhaW1zL2lkZW50aXR5cHJvdmlkZXIiOiJBU1AuTkVUIElkZW50aXR5IiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4MGZjZmFjYi02Yjc4LTQ1OGMtODg1Zi02MWM5ZjBmN2JhM2QiLCJyb2xlIjoiU2VjcmV0YXJpYSIsIkZURSI6IjEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjE4NzYiLCJhdWQiOiI0MTRlMTkyN2EzODg0ZjY4YWJjNzlmNzI4MzgzN2ZkMSIsImV4cCI6MTQ5NDI4MDQ2NSwibmJmIjoxNDk0MTk0MDY1fQ.f7rPJUcu_zgVqVyZQEYMA6ZnHr8sr-JcfOcRokuK72c",
+            "token_type": "bearer",
+            "expires_in": 86399,
+            "roles": "",
+            "persona": '',
+            "usuario": '{"FirstName":"secretaria","LastName":"secretaria","Level":1,"JoinDate":"2014-05-07T16:48:12.83","PersonaId":2,"Persona":null,"Cobros":[],"Email":"secretaria@gmail.com","EmailConfirmed":true,"PasswordHash":"AMbhg5E0sYddwbZC1/SoeK0dahUP3Aq65LOJzMEIN5uZcGomJfb4lOWflDxiGfzoqQ==","SecurityStamp":"80fcfacb-6b78-458c-885f-61c9f0f7ba3d","PhoneNumber":null,"PhoneNumberConfirmed":false,"TwoFactorEnabled":false,"LockoutEndDateUtc":null,"LockoutEnabled":false,"AccessFailedCount":0,"Roles":[{"UserId":"d04f9220-5bef-46e8-be43-f28e087805d0","RoleId":"08a288de-8f82-4d4f-b3b4-a898f00d39b2"}],"Claims":[],"Logins":[],"Id":"d04f9220-5bef-46e8-be43-f28e087805d0","UserName":"secretaria"}'
+        }
+
         if ((params.username === testUser.username && params.password === testUser.password)) {
-            return [200, { access_token: 'fake-jwt-token',roles:'Abogado;Abogado'}, {}];
+            json.persona = '{"PersonaId":2,"Identificacion":"10253652142","Nombres":"Yo Soy","Apellidos":"Abogado Proyecto","Sexo":"F","Telefono":31500212,"Direccion":"Carrera 13 # 36 - 111","TipoPersonaId":1,"TipoPersona":null,"Nacionalidad":"Colombia","PaisNacimiento":"Colombia","PaisCorrespondencia":"Colombia","Departamento":"Cesar","Municipio":"Valledupar","Email":"soyabogado.14@hotmail.com","FechaNacimiento":"1996-07-30T00:00:00","Obligaciones":[],"UpdateAt":"2017-05-07T00:00:00","CreatedAt":"2017-05-07T00:00:00"}';
+            json.roles = "Abogado;Abogado";
+            return [200, json, {}];
         } else if((params.username === testUser2.username && params.password === testUser2.password)){
-            return [200, { access_token: 'fake-jwt-token',roles:'Secretaria;Secretaria'}, {}];
+            json.persona = '{"PersonaId":2,"Identificacion":"10253652142","Nombres":"Yo Soy","Apellidos":"Secretaria Proyecto","Sexo":"F","Telefono":31500212,"Direccion":"Carrera 13 # 36 - 111","TipoPersonaId":1,"TipoPersona":null,"Nacionalidad":"Colombia","PaisNacimiento":"Colombia","PaisCorrespondencia":"Colombia","Departamento":"Cesar","Municipio":"Valledupar","Email":"soysecretaria.14@hotmail.com","FechaNacimiento":"1996-07-30T00:00:00","Obligaciones":[],"UpdateAt":"2017-05-07T00:00:00","CreatedAt":"2017-05-07T00:00:00"}';
+            json.roles = "Secretaria;Secretaria";
+            return [200, json, {}];
+        } else if((params.username === testUser3.username && params.password === testUser3.password)){
+            json.persona = '{"PersonaId":2,"Identificacion":"10253652142","Nombres":"Yo Soy","Apellidos":"Lider Proyecto","Sexo":"F","Telefono":31500212,"Direccion":"Carrera 13 # 36 - 111","TipoPersonaId":1,"TipoPersona":null,"Nacionalidad":"Colombia","PaisNacimiento":"Colombia","PaisCorrespondencia":"Colombia","Departamento":"Cesar","Municipio":"Valledupar","Email":"soylider.14@hotmail.com","FechaNacimiento":"1996-07-30T00:00:00","Obligaciones":[],"UpdateAt":"2017-05-07T00:00:00","CreatedAt":"2017-05-07T00:00:00"}';
+            json.roles = "Lider;Lider";
+            return [200, json, {}];
         }else{
             return [400, {error_description:"Usuario o contraseña incorrecta"}, {}];
         }
@@ -22,6 +40,132 @@ function setupFakeBackend($httpBackend) {
 
     $httpBackend.whenPOST('/api_registrar').respond(function (method, url, data) {
         return [200, {filasAfectadas:1, mensaje:"Guardado Correctamente",error:false}, {}];
+    });
+
+    $httpBackend.whenGET('/api/GETobligacionesTipos').respond(function (method, url, data) {
+        var json = [
+        {
+            "tipoObligacionId": 1,
+            "nombre": "Tipo Obligacion 1",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "tipoObligacionId": 2,
+            "nombre": "Tipo Obligacion 2",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "tipoObligacionId": 3,
+            "nombre": "Tipo Obligacion 3",
+            "obligaciones": [],
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        }
+        ];
+        return [200, json, {}];
+    });
+
+    $httpBackend.whenGET('/api/GETobligaciones').respond(function (method, url, data) {
+        var json = [
+        {
+            "obligacionId": 1,
+            "cuantia": 525000,
+            "dueda": 525000,
+            "fechaPreinscripcion": "2017-03-09T00:00:00",
+            "estado": "Por autorizar",
+            "cobros": [],
+            "expedienteId": 1,
+            "expediente": {
+                "expedienteId": 1,
+                "entidadEncargada": "Entidad encargada es maira",
+                "nombre": "Maira mindiola",
+                "identificacion": "1065824563",
+                "direccionEjecutado": "Esto es una direccion",
+                "cuantia": 525000,
+                "naturalezaObligacion": "Naturaleza es algo",
+                "direccionTituloEjecutivo": "Esto es una direcciond e titulo ejecutivo",
+                "descripcion": "Esto es una descripcion",
+                "ubicacionExpediente": "Esta en el lote tal",
+                "fechaRadicacion": "2017-03-19T00:00:00",
+                "updateAt": "0001-01-01T00:00:00",
+                "createdAt": "0001-01-01T00:00:00",
+                "documentos": [],
+            },
+            "tipoObligacionId": 1,
+            "tipoObligacion": null,
+            "personaId": 1,
+            "persona": null,
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "obligacionId": 2,
+            "cuantia": 300000,
+            "dueda": 300000,
+            "fechaPreinscripcion": "2017-03-09T00:00:00",
+            "estado": "Por autorizar",
+            "cobros": [],
+            "expedienteId": 2,
+            "expediente": {
+                "expedienteId": 2,
+                "entidadEncargada": "Entidad encargada es maira",
+                "nombre": "Sebas Gonzalez",
+                "identificacion": "1065823365",
+                "direccionEjecutado": "Esto es una direccion",
+                "cuantia": 300000,
+                "naturalezaObligacion": "Naturaleza es algo",
+                "direccionTituloEjecutivo": "Esto es una direcciond e titulo ejecutivo",
+                "descripcion": "Esto es una descripcion",
+                "ubicacionExpediente": "Esta en el lote tal",
+                "fechaRadicacion": "2017-03-19T00:00:00",
+                "updateAt": "0001-01-01T00:00:00",
+                "createdAt": "0001-01-01T00:00:00",
+                "documentos": [],
+            },
+            "tipoObligacionId": 1,
+            "tipoObligacion": null,
+            "personaId": 1,
+            "persona": null,
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        },
+        {
+            "obligacionId": 3,
+            "cuantia": 999999,
+            "dueda": 999999,
+            "fechaPreinscripcion": "2017-03-09T00:00:00",
+            "estado": "Por autorizar",
+            "cobros": [],
+            "expedienteId": 3,
+            "expediente": {
+                "expedienteId": 3,
+                "entidadEncargada": "Entidad encargada es maira",
+                "nombre": "Javier hernandez",
+                "identificacion": "1111111111",
+                "direccionEjecutado": "Esto es una direccion",
+                "cuantia": 999999,
+                "naturalezaObligacion": "Naturaleza es algo",
+                "direccionTituloEjecutivo": "Esto es una direcciond e titulo ejecutivo",
+                "descripcion": "Esto es una descripcion",
+                "ubicacionExpediente": "Esta en el lote tal",
+                "fechaRadicacion": "2017-03-19T00:00:00",
+                "updateAt": "0001-01-01T00:00:00",
+                "createdAt": "0001-01-01T00:00:00",
+                "documentos": [],
+            },
+            "tipoObligacionId": 1,
+            "tipoObligacion": null,
+            "personaId": 1,
+            "persona": null,
+            "updateAt": "0001-01-01T00:00:00",
+            "createdAt": "0001-01-01T00:00:00"
+        }
+        ];
+        return [200, json, {}];
     });
 
 

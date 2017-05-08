@@ -10,6 +10,22 @@ App.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
         controller: 'LoginController'
     })
 
+    .state('Lider', {
+        url: "/Lider",
+        templateUrl: "views/Lider/index.html",
+        controller: 'IndexController'
+    })
+    
+    .state('Lider.RegistrarUsers', {
+        url: "/RegistrarUsuarios",
+        views:{
+            "MainView@Lider":{
+                 templateUrl: "views/Lider/registrar_usuarios.html",
+                 controller: 'RegistrarUsers'
+            }
+        } 
+    })
+
     .state('Abogado', {
         url: "/Abogado",
         templateUrl: "views/Abogado/index.html",

@@ -7,13 +7,13 @@
     <br><br>
     <div class="row">
       <nav>
-          <div class="nav-wrapper grey">
-            <div class="col s12">
-              <a class="breadcrumb">Paso 1</a>
-              <a class="breadcrumb">Paso 2</a>
-            </div>
+        <div class="nav-wrapper grey">
+          <div class="col s12">
+            <a class="breadcrumb">Paso 1</a>
+            <a class="breadcrumb">Paso 2</a>
           </div>
-        </nav>
+        </div>
+      </nav>
     </div>
     <h3>Expediente {{datos.expedienteId}}</h3>
     <div class="row">
@@ -21,18 +21,7 @@
       <div class="col s12 m6"><h5>Nombre: {{datos.expediente.nombre}}</h5></div>
     </div>
     <fieldset> <legend>Documentos Adjuntos</legend>
-    <iframe src="/api_file.html" style="width: 100%;height: 460px;"></iframe>
-      <!-- <div class="file-field input-field">
-       <div class="btn grey">
-         <span><i class="material-icons">archive</i></span>
-         <input type="file" onchange="angular.element(this).scope().cambio(event)" id="file1">
-       </div>
-       <div class="file-path-wrapper">
-         <input class="file-path validate" type="text" placeholder="Adjuntar Uno o Mas Archivos">
-       </div>
-     </div> -->
-
-     <!-- <input id="input-700" name="kartik-input-700[]" type="file" multiple class="file-loading"> -->
-   </fieldset>
- </div>
+      <iframe id="iframeDoc" src="" style="width: 100%;height: 460px;"></iframe>
+    </fieldset>
+  </div>
 </div>
