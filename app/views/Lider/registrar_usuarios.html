@@ -2,13 +2,19 @@
 	<div class="card-panel z-depth-2">
 		<h3><span><i class="material-icons medium left">inbox</i><span> Registro de Usuarios</h3>
                 <div class="row">
-                    <div class="input-field">
+                    <div class="input-field col s6">
                         <label>Tipo de Persona</label><br>
                         <input type="radio" name="persona" id="radioNatural" value="1" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
                         <label for="radioNatural">Natural</label>
                         <input type="radio" name="persona" id="radioJuridica" value="2" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
                         <label for="radioJuridica">Juridica</label>
-                    </div>	
+                    </div>
+                    <div class="input-field col s6">
+                        <select id="cmbRol">
+                                <option ng-repeat="dato in listadoRoles" value="{{dato.name}}">{{dato.name}}</option>
+                        </select>
+                        <label for="cmbRol">Rol Sistema</label>
+                    </div>
                 </div>
                             <div class="row">
 				<fieldset> <legend>Datos Personales</legend>
@@ -81,68 +87,27 @@
 					<label for="inputEmailCorr">Email</label>
 				</div>
 			</fieldset>
-			<div class="row"></div>
-			<fieldset> <legend>Informacion adicional</legend>
-
-				<div class="input-field col s12">
-					<textarea id="textarea1" class="materialize-textarea validate" ng-model="Nuevo.Expediente.Descripcion"></textarea>
-					<label for="textarea1">Descripción</label>
+                        <div class="row"></div>
+			<fieldset> <legend>Datos de Usuario</legend>
+				<div class="input-field col s3">
+					<input type="text" name="usuario" id="inputUsuario" ng-model="Nuevo.CreateUserBindingModel.UserName" class="validate">
+					<label for="inputUsuario">Usuario</label>
 				</div>
-
-				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputDirEjecutado" ng-model="Nuevo.Expediente.DireccionEjecutado" class="validate">
-					<label for="inputDirEjecutado">Dirección Ejecutado</label>
+				<div class="input-field col s3">
+					<input type="password" name="password" id="inputPassword" ng-model="Nuevo.CreateUserBindingModel.Password"  class="validate">
+					<label for="inputPassword" data-error="Letras Numero y Caracteres Especiales" data-success="">Password</label>
 				</div>
-
-				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputDirTitEje" ng-model="Nuevo.Expediente.DireccionTituloEjecutivo" class="validate">
-					<label for="inputDirTitEje">Dirección Título Ejecutivo</label>
-				</div>
-
-				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputEntEncar" ng-model="Nuevo.Expediente.EntidadEncargada" class="validate">
-					<label for="inputEntEncar">Entidad Encargada</label>
-				</div>
-
-				<div class="input-field col s6">
-					<input type="date" name="municipio" id="inputFechaRadi" class="datepicker">
-					<label for="inputFechaRadi">Fecha Radicación</label>
-				</div>
-
-				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputNatObliga" ng-model="Nuevo.Expediente.NaturalezaObligacion" class="validate">
-					<label for="inputNatObliga">Naturaleza Obligación</label>
-				</div>
-
-				<div class="input-field col s6">
-					<input type="text" name="municipio" id="inputUbicaExped" ng-model="Nuevo.Expediente.UbicacionExpediente" class="validate">
-					<label for="inputUbicaExped">Ubicación Expediente</label>
+				<div class="input-field col s3">
+                                    <input type="password" name="confirmpassword" id="inputConfirmPassword" ng-model="Nuevo.CreateUserBindingModel.ConfirmPassword" class="validate">
+					<label for="inputConfirmPassword" data-error="Coincidir Con Password" data-success="">Confirmar Password</label>
 				</div>
 			</fieldset>
-
-			<div class="row"></div>
-			<fieldset> <legend>Obligación</legend>
-
-				<div class="input-field col s6">
-					<input type="number" name="municipio" id="inputDeuda" ng-model="Nuevo.Deuda" pattern="[0-9]*" class="validate">
-					<label for="inputDeuda" data-error="Sólo Números" data-success="">Deuda Y Cuantia</label>
-				</div>
-				<div class="input-field col s6">
-					<input type="date" name="municipio" id="inputFechaPreins" class="datepicker">
-					<label for="inputFechaPreins">Fecha Preinscripción</label>
-				</div>
-
-				<div class="input-field col s6">
-					<select id="cmbTipoObligacion">
-						<option ng-repeat="dato in listadoTiposObligaciones" value="{{dato.tipoObligacionId}}">{{dato.nombre}}</option>
-					</select>
-					<label for="cmbTipoObligacion">Tipo de Obligaciones</label>
-				</div>
-
-			</fieldset>
-			<br>
+                        <br>
 			<div class="row">
-				<input type="button" class="btn grey" id="btnreg" ng-click="registar()" value="Registrar">
+                            <input type="button" class="btn grey" id="btnreg" ng-click="clickRegistrarUsuario()" value="Registrar">
+                            <div class="progress" id="Cargando">
+                                <div class="indeterminate"></div>
+                            </div>
 			</div>
 	</div>
 </div>

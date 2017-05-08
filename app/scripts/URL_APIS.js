@@ -8,6 +8,7 @@ var URL_APIS = {
 		Registar:dominio+"/api/obligaciones",
 		ObtenerExpedientes:dominio+"/api/obligaciones",
 		ObtenerTiposObligaciones:dominio+"/api/tiposobligaciones",
-                ObtenerRoles:dominio+"/api/roles"
+                ObtenerRoles:dominio+"/api/roles",
+                RegistrarUsuarioByLider:dominio+"/api/accounts/create"
 	}
 }

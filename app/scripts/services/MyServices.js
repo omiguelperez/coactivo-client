@@ -26,6 +26,33 @@ App.service("MiServicio", function ($http,$sessionStorage) {
             });
 
 	};
+        
+        this.RegistrarUsuarioByLider = function(Datos,callback) {
+
+            $http({
+                method: 'POST',
+                url: URL_APIS.MiServicio.RegistrarUsuarioByLider,
+                data: $.param(Datos),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                }).then(function(successCallback) {   
+                    if (successCallback.data.url!=="undefined") {
+                        callback(!false,"Usuario Registrado Correctamente");
+                    }else{
+                        callback(!successCallback.data.error,successCallback.data.mensaje);
+                    }
+                }, function(errorCallback){
+                    if (errorCallback.status == 400) {
+                        callback(false,errorCallback.data.modelState[""][0]);
+                    }else  if (errorCallback.status == 500) {
+                        callback(false,errorCallback.data.message+" - "+errorCallback.data.exceptionMessage);   
+                    }else  if (errorCallback.status == 401) {
+                        callback(false,errorCallback.data.message);   
+                    }
+            });
+
+	};
 
 	this.ObtenerExpedientes = function(callback) {
 		
