@@ -9,20 +9,37 @@
  */
  App.controller('RegistrarUsers', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
 
-  $('input.autocomplete').autocomplete({
-      data: {
-        "Colombia": null,
-        "Estados Unidos": null,
-        "España": null
-          //"España": 'http://placehold.it/250x250'
-      },
-        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function(val) {
-          // Callback function when value is autcompleted.
-      },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    $('#cmbNacionalidad').change(function(){
+        var pais=$.trim($("#cmbNacionalidad option:selected").text());
+        $("#inputNac").val(pais);
+        $scope.Nuevo.Persona.Nacionalidad=pais;
+        Materialize.updateTextFields();
     });
-
+    $('#cmbPaisCorrespondencia').change(function(){
+        var texto=$.trim($("#cmbPaisCorrespondencia option:selected").text());
+        $("#inputPaisCorr").val(texto);
+        $scope.Nuevo.Persona.PaisCorrespondencia=texto;
+        Materialize.updateTextFields();
+    });
+    $('#cmbPaisNacimiento').change(function(){
+        var texto=$.trim($("#cmbPaisNacimiento option:selected").text());
+        $("#inputPaisNaci").val(texto);
+        $scope.Nuevo.Persona.PaisNacimiento=texto;
+        ObtenerDepartamentosPorPais($(this).val());
+        Materialize.updateTextFields();
+    });
+    $('#cmbDepartamento').change(function(){
+        var texto=$.trim($("#cmbDepartamento option:selected").text());
+        $("#inputDepartamentoNaci").val(texto);
+        $scope.Nuevo.Persona.Departamento=texto;
+        ObtenerMunicipiosPorDepartamento($(this).val());
+        Materialize.updateTextFields();
+    });
+    $('#cmbMunicipio').change(function(){
+        var texto=$.trim($("#cmbMunicipio option:selected").text());
+        $("#inputMunicipioNaci").val(texto);
+        Materialize.updateTextFields();
+    });
 function iniController(){
     $("#Cargando").hide();
     $scope.NumeroExpediente="5";
@@ -38,10 +55,11 @@ function iniController(){
             PaisNacimiento:"",
             PaisCorrespondencia:"",
             Departamento:"",
-            Municipio:"",
-            TipoPersonaId:"",
-            Telefono:"",
+            MunicipioId: 68020,
+            PaisId: 1,
             FechaNacimiento:"",
+            TipoPersonaId: 1,
+            Telefono:"",
         },
         "CreateUserBindingModel":{ 
             UserName:"", 
@@ -59,11 +77,35 @@ function ObtenerRolesPorLiderAbogado() {
     setTimeout(function() {$('select').material_select();}, 1500);
 }
 
-function ObtenerTiposObligaciones() {
-    MiServicio.ObtenerTiposObligaciones(function(datos) {
-        $scope.listadoTiposObligaciones = datos;
+function ObtenerPaises() {
+    MiServicio.ObtenerPaises(function(datos) {
+        ObtenerDepartamentosPorPais(datos[0].paisId);
+        $scope.Nuevo.Persona.Nacionalidad=datos[0].nombre;
+        $scope.Nuevo.Persona.PaisCorrespondencia=datos[0].nombre;
+        $scope.Nuevo.Persona.PaisNacimiento=datos[0].nombre;
+        Materialize.updateTextFields();
+        $scope.listadoPaises = datos;
     });  
-    setTimeout(function() {$('select').material_select();}, 2000);
+    setTimeout(function() {$('select').material_select();}, 500);
+}
+
+function ObtenerDepartamentosPorPais(IdPais) {
+    MiServicio.ObtenerDepartamentosByIdPais(IdPais,function(datos) {
+        ObtenerMunicipiosPorDepartamento(datos[0].departamentoId);
+        $scope.Nuevo.Persona.Departamento=datos[0].nombre;
+        Materialize.updateTextFields();
+        $scope.listadoDepartamentos = datos;
+    });  
+    setTimeout(function() {$('select').material_select();}, 500);
+}
+
+function ObtenerMunicipiosPorDepartamento(IdDepartamento) {
+    MiServicio.ObtenerMunicipiosByIdDepartamento(IdDepartamento,function(datos) {
+        $scope.Nuevo.Persona.MunicipioId=datos[0].municipioId;
+        Materialize.updateTextFields();
+        $scope.listadoMunicipios = datos;
+    });  
+    setTimeout(function() {$('select').material_select();}, 500);
 }
 
 $scope.GestionarDocumentosSecretaria=function(dato) {
@@ -81,25 +123,27 @@ $scope.Mostrar = function() {
 }
   iniController();
   ObtenerRolesPorLiderAbogado();
-  //ObtenerTiposObligaciones();
+  ObtenerPaises();
 
 $scope.clickRegistrarUsuario = function() {
 
     $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
     $scope.Nuevo.CreateUserBindingModel.RoleName = $("#cmbRol").val();
+    $scope.Nuevo.Persona.MunicipioId=$("#cmbMunicipio").val();
+    $scope.Nuevo.Persona.PaisId=$("#cmbPaisNacimiento").val();
     $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
     {id:"inputNombres",value:$scope.Nuevo.Persona.Nombres},
     {id:"inputpApellido",value:$scope.Nuevo.Persona.Apellidos},
     {id:"cmbSexo",value:$scope.Nuevo.Persona.Sexo},
-    {id:"inputNac",value:$scope.Nuevo.Persona.Nacionalidad},
+    //{id:"inputNac",value:$scope.Nuevo.Persona.Nacionalidad},
     {id:"inputNacimiento",value:$scope.Nuevo.Persona.FechaNacimiento},
-    {id:"inputPaisNaci",value:$scope.Nuevo.Persona.PaisNacimiento},
-    {id:"inputDepartamentoNaci",value:$scope.Nuevo.Persona.Departamento},
-    {id:"inputMunicipioNaci",value:$scope.Nuevo.Persona.Municipio},
+    //{id:"inputPaisNaci",value:$scope.Nuevo.Persona.PaisNacimiento},
+    //{id:"inputDepartamentoNaci",value:$scope.Nuevo.Persona.Departamento},
+    //{id:"inputMunicipioNaci",value:$scope.Nuevo.Persona.Municipio},
     {id:"inputDireccion",value:$scope.Nuevo.Persona.Direccion},
-    {id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
+    //{id:"inputPaisCorr",value:$scope.Nuevo.Persona.PaisCorrespondencia},
     {id:"inputTelefonoCorr",value:$scope.Nuevo.Persona.Telefono},
     {id:"inputEmailCorr",value:$scope.Nuevo.Persona.Email},
     {id:"inputUsuario",value:$scope.Nuevo.CreateUserBindingModel.UserName},
@@ -113,11 +157,11 @@ $scope.clickRegistrarUsuario = function() {
         if (!resp.status) {
             Mensaje(resp.msg,3000,'red rounded',resp.id);
         }else{
-            resp = Validaciones.FechaNacimiento([arrayValidate[6]]);
+            resp = Validaciones.FechaNacimiento([arrayValidate[4]]);
             if (!resp.status) {
                 Mensaje(resp.msg,3000,'red rounded',resp.id);
             }else{
-                var resp = Validaciones.FechaLimite([arrayValidate[6]]);
+                var resp = Validaciones.FechaLimite([arrayValidate[4]]);
                 if (!resp.status) {
                     Mensaje(resp.msg,3000,'red rounded',resp.id);
                 }else{
