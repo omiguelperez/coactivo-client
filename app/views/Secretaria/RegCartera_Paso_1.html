@@ -14,29 +14,18 @@
 				</div>
 			</nav>
 		</div>
-
-		<!-- <form> -->
+		<div id="DatosPersonales" >
 			<div class="row">
-				<div class="input-field">
-					<label>Tipo de Persona</label><br>
-					<input type="radio" name="persona" id="radioNatural" value="1" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
-					<label for="radioNatural">Natural</label>
-					<input type="radio" name="persona" id="radioJuridica" value="2" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
-					<label for="radioJuridica">Juridica</label>
-				</div>	
-			</div>
-
-			<div class="row">
+                    <div class="input-field col s6">
+                        <label>Tipo de Persona</label><br>
+                        <input type="radio" name="persona" id="radioNatural" value="1" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
+                        <label for="radioNatural">Natural</label>
+                        <input type="radio" name="persona" id="radioJuridica" value="2" ng-model="Nuevo.Persona.TipoPersonaId" class="with-gap">
+                        <label for="radioJuridica">Juridica</label>
+                    </div>
+                </div>
+                            <div class="row">
 				<fieldset> <legend>Datos Personales</legend>
-				<!-- <div class="input-field col s2">
-					<select id="cmbTipoId">
-						<option value="1-Cedula">Cedula</option>
-						<option value="2-Cedula Ex">Cedula Ex</option>
-						<option value="3-Pasaporte">Pasaporte</option>
-					</select>
-					<label for="cmbTipoId">Tipo De Documento</label>
-				</div> -->
-
 				<div class="input-field col s4">
 					<input type="number" name="identificacion" id="inputidentificacion" ng-model="Nuevo.Persona.Identificacion" class="validate" pattern="[0-9]*" >
 					<label for="inputidentificacion" data-error="Sólo Números" data-success="">Numero Documento</label>
@@ -49,12 +38,6 @@
 					<input type="text" name="pApellido" id="inputpApellido" ng-model="Nuevo.Persona.Apellidos" class="validate" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*">
 					<label for="inputpApellido" data-error="Sólo Letras" data-success="">Apellidos</label>
 				</div>
-
-				<!-- <div class="input-field col s3">
-					<input type="text" name="sApellido" id="inputsApellido" ng-model="Nuevo.S_Apellido" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
-					<label for="inputsApellido" data-error="Sólo Letras" data-success="">Segundo Apellido</label>
-				</div> -->
-				
 				<div class="input-field col s4">
 					<select id="cmbSexo">
 						<option selected="false" disabled="false">Seleccione una Opción</option>
@@ -63,21 +46,12 @@
 					</select>
 					<label for="cmbSexo">Sexo</label>
 				</div>
-
-				<!-- <div class="input-field col s5">
-					<fieldset> <legend>Nacionalidad</legend>
-						<input type="radio" name="Nacionalidad" id="radioCol" ng-model="Nuevo.Expediente.Persona.Nacionalidad" class="with-gap" >
-						<label for="radioCol">Colombiano</label>
-
-						<input type="radio" name="Nacionalidad" id="radioExtranjero" ng-model="Nuevo.Expediente.Persona.Nacionalidad" class="with-gap">
-						<label for="radioExtranjero">Extranjero</label>	
-					</fieldset>
-				</div> -->	
-
 				<div class="input-field col s3">
-					<input type="text" name="paisnacionalidad" id="inputNac" ng-model="Nuevo.Persona.Nacionalidad" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="autocomplete validate">
-					<label for="inputNac" data-error="Sólo Letras" data-success="">Nacionalidad</label>
-				</div>
+                    <select id="cmbNacionalidad">
+                            <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
+                    </select>
+                    <label for="cmbNacionalidad">Nacionalidad</label>
+                </div>
 			</fieldset>
 
 
@@ -90,17 +64,23 @@
 					<label for="inputNacimiento">Fecha de Nacimiento</label>
 				</div>
 				<div class="input-field col s3">
-					<input type="text" name="pais" id="inputPaisNaci" ng-model="Nuevo.Persona.PaisNacimiento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate autocomplete">
-					<label for="inputPaisNaci" data-error="Sólo Letras" data-success="">Pais Nacimiento</label>
-				</div>
+                    <select id="cmbPaisNacimiento">
+                            <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
+                    </select>
+                    <label for="cmbPaisNacimiento">Pais Nacimiento</label>
+                </div>
 				<div class="input-field col s3">
-					<input type="text" name="departamento" id="inputDepartamentoNaci" ng-model="Nuevo.Persona.Departamento" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
-					<label for="inputDepartamentoNaci" data-error="Sólo Letras" data-success="">Departamento</label>
-				</div>
+                    <select id="cmbDepartamento">
+                            <option ng-repeat="dato in listadoDepartamentos" value="{{dato.departamentoId}}">{{dato.nombre}}</option>
+                    </select>
+                    <label for="cmbDepartamento">Departamento</label>
+                </div>
 				<div class="input-field col s3">
-					<input type="text" name="municipio" id="inputMunicipioNaci" ng-model="Nuevo.Persona.Municipio" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
-					<label for="inputMunicipioNaci" data-error="Sólo Letras" data-success="">Municipio</label>
-				</div>
+                    <select id="cmbMunicipio">
+                            <option ng-repeat="dato in listadoMunicipios" value="{{dato.municipioId}}">{{dato.nombre}}</option>
+                    </select>
+                    <label for="cmbMunicipio">Municipio</label>
+                </div>
 			</fieldset>
 			<div class="row"></div>
 			<fieldset> <legend>Direccion de Correspondencia</legend>
@@ -109,17 +89,12 @@
 					<label for="inputDireccion">Direccion</label>
 				</div>
 				<div class="input-field col s3">
-					<input type="text" name="pais" id="inputPaisCorr" ng-model="Nuevo.Persona.PaisCorrespondencia" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate autocomplete">
-					<label for="inputPaisCorr" data-error="Sólo Letras" data-success="">Pais Correspondencia</label>
-				</div>
-				<!-- <div class="input-field col s3">
-					<input type="text" name="departamento" id="inputDepartamentoCorr" ng-model="Nuevo.Depar_Actual" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
-					<label for="inputDepartamentoCorr" data-error="Sólo Letras" data-success="">Departamento</label>
-				</div>
-				<div class="input-field col s3">
-					<input type="text" name="municipio" id="inputMunicipioCorr" ng-model="Nuevo.Muni_Actual" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*" class="validate">
-					<label for="inputMunicipioCorr" data-error="Sólo Letras" data-success="">Municipio</label>
-				</div> -->
+                    <select id="cmbPaisCorrespondencia">
+                            <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
+                    </select>
+                    <label for="cmbPaisCorrespondencia">Pais Correspondencia</label>
+                </div>
+				
 				<div class="input-field col s3">
 					<input type="number" name="telefono" id="inputTelefonoCorr" ng-model="Nuevo.Persona.Telefono" pattern="[0-9]*" class="validate">
 					<label for="inputTelefonoCorr" data-error="Sólo Números" data-success="">Telefono</label>
@@ -129,6 +104,7 @@
 					<label for="inputEmailCorr">Email</label>
 				</div>
 			</fieldset>
+		</div>
 			<div class="row"></div>
 			<fieldset> <legend>Informacion adicional</legend>
 

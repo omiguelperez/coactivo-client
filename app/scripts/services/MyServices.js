@@ -49,6 +49,8 @@ App.service("MiServicio", function ($http,$sessionStorage) {
                         callback(false,errorCallback.data.message+" - "+errorCallback.data.exceptionMessage);   
                     }else  if (errorCallback.status == 401) {
                         callback(false,errorCallback.data.message);   
+                    }else  if (errorCallback.status == 409) {
+                        callback(false,"LA Persona Ya Existe, Por Favor Verifique");   
                     }
             });
 
@@ -84,11 +86,62 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 
 	};
         
-        this.ObtenerRolesByLider = function(callback) {
+    this.ObtenerRolesByLider = function(callback) {
 		
 		$http({
 			method: 'GET',
 			url: URL_APIS.MiServicio.ObtenerRoles,
+			data: $.param(""),
+			headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+		}).then(function(successCallback) {   
+			callback(successCallback.data);
+		}, function(errorCallback){
+			
+		});
+
+	};
+
+	this.ObtenerPaises = function(callback) {
+		
+		$http({
+			method: 'GET',
+			url: URL_APIS.MiServicio.ObtenerPaises,
+			data: $.param(""),
+			headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+		}).then(function(successCallback) {   
+			callback(successCallback.data);
+		}, function(errorCallback){
+			
+		});
+
+	};
+
+	this.ObtenerDepartamentosByIdPais = function(IdPais,callback) {
+		
+		$http({
+			method: 'GET',
+			url: URL_APIS.MiServicio.ObtenerDepartamentosByPaisId+""+IdPais,
+			data: $.param(""),
+			headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+		}).then(function(successCallback) {   
+			callback(successCallback.data);
+		}, function(errorCallback){
+			
+		});
+
+	};
+
+	this.ObtenerMunicipiosByIdDepartamento = function(IdDepartamento,callback) {
+		
+		$http({
+			method: 'GET',
+			url: URL_APIS.MiServicio.ObtenerMunicipiosByDepartamentoId+""+IdDepartamento,
 			data: $.param(""),
 			headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
