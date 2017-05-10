@@ -15,6 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/materialize/bin/materialize.js",
         "bower_components/angular/angular.js",
         "http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js",
         "http://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js",

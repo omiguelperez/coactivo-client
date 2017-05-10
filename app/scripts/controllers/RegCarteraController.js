@@ -9,22 +9,12 @@
  */
  App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
 
-  $('input.autocomplete').autocomplete({
-      data: {
-        "Colombia": null,
-        "Estados Unidos": null,
-        "España": null
-          //"España": 'http://placehold.it/250x250'
-      },
-        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function(val) {
-          // Callback function when value is autcompleted.
-      },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    });
+ 
 
 function iniController(){
+
     $scope.NumeroExpediente="5";
+    
     $scope.Nuevo = {
         Cuantia:"", 
         Deuda:"", 
@@ -80,6 +70,26 @@ $scope.GestionarDocumentosSecretaria=function(dato) {
     TemporalData.almacenar(dato);
 }
 
+$('#cmbSexo').on('change',function() {
+    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
+});
+
+$('#cmbTipoObligacion').on('change',function() {
+    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
+});
+
+$('#inputFechaPreins').on('change',function() {
+    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
+});
+
+$('#inputFechaRadi').on('change',function() {
+    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
+});
+
+$('#inputNacimiento').on('change',function() {
+    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+});
+
 $scope.Mostrar = function() {
     //el simbolo # genera pronblemas
     var aux=$sessionStorage.currentUser.persona+"";
@@ -93,20 +103,12 @@ $scope.Mostrar = function() {
   ObtenerTiposObligaciones();
 
 $scope.registar = function() {
-
+    console.log($scope.Nuevo);
     $scope.Nuevo.Cuantia = $scope.Nuevo.Deuda;
     $scope.Nuevo.Expediente.Cuantia = $scope.Nuevo.Deuda;
-    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
+    
     $scope.Nuevo.Expediente.Identificacion = $scope.Nuevo.Persona.Identificacion;
     $scope.Nuevo.Expediente.Nombre = $scope.Nuevo.Persona.Nombres;
-
-    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
-    
-    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
-
-    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
-
-    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
     
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
@@ -134,18 +136,18 @@ $scope.registar = function() {
     {id:"inputFechaPreins",value:$scope.Nuevo.FechaPreinscripcion},
     {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
 
-    var resp = Validaciones.nulos(arrayValidate);
+    $scope.resp = Validaciones.nulos(arrayValidate);
     
-    if (!resp.status) {
-        Mensaje(resp.msg,3000,'red rounded',resp.id);
+    if (!$scope.resp.status) {
+        Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
     }else{
-        resp = Validaciones.FechaNacimiento([arrayValidate[6]]);
-        if (!resp.status) {
-            Mensaje(resp.msg,3000,'red rounded',resp.id);
+        $scope.resp = Validaciones.FechaNacimiento([arrayValidate[6]]);
+        if (!$scope.resp.status) {
+            Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
         }else{
-            var resp = Validaciones.FechaLimite([arrayValidate[6],arrayValidate[18],arrayValidate[23]]);
-            if (!resp.status) {
-                Mensaje(resp.msg,3000,'red rounded',resp.id);
+            $scope.resp = Validaciones.FechaLimite([arrayValidate[6],arrayValidate[18],arrayValidate[23]]);
+            if (!$scope.resp.status) {
+                Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
             }else{
                 console.log($scope.Nuevo);
                 MiServicio.Registar($scope.Nuevo,function(resp_,msg) {

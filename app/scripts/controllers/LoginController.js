@@ -11,7 +11,7 @@ App.controller('LoginController', function ($scope, $sessionStorage,$location, A
     $scope.username;
     $scope.password;
 
-	initController();
+    initController();
 
     function initController() {
         if ($sessionStorage.currentUser) {
@@ -20,7 +20,7 @@ App.controller('LoginController', function ($scope, $sessionStorage,$location, A
     };
 
     $scope.login = function() {
-    	$scope.error = false;
+        $scope.error = false;
         AuthenticationService.Login($scope.username, $scope.password, function(resp,user,msg) {
             if (resp) {
                 $location.path("/"+user);
