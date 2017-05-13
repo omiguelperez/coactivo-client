@@ -74,7 +74,7 @@ function ReiniciarCampos(){
     };
 }
 function ObtenerRolesPorLiderAbogado() {
-    MiServicio.ObtenerRolesByLider(function(datos) {
+    MiServicio.ObtenerRolesByLider($scope.session,function(datos) {
         $scope.listadoRoles = datos;
     });
     setTimeout(function() {$('select').material_select();}, 1500);
@@ -128,13 +128,16 @@ $scope.Mostrar = function() {
   ObtenerRolesPorLiderAbogado();
   ObtenerPaises();
 
+  $("#inputNacimiento").change(function() {
+    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+  });
+
 $scope.clickRegistrarUsuario = function() {
 
     $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
     $scope.Nuevo.CreateUserBindingModel.RoleName = $("#cmbRol").val();
     $scope.Nuevo.Persona.MunicipioId=$("#cmbMunicipio").val();
     $scope.Nuevo.Persona.PaisId=$("#cmbPaisNacimiento").val();
-    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
     {id:"inputNombres",value:$scope.Nuevo.Persona.Nombres},

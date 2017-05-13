@@ -141,21 +141,33 @@ $scope.Mostrar = function() {
   ObtenerTiposObligaciones();
   ObtenerPaises();
 
+  $("#inputFechaPreins").change(function() {
+    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
+  });
+
+  $("#inputFechaRadi").change(function() {
+    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
+  });
+
+  $("#inputNacimiento").change(function() {
+    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
+  });
+
+  $("#cmbTipoObligacion").change(function() {
+    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
+      
+  });
+
+  $("#cmbSexo").change(function() {
+    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
+  });
+
 $scope.registar = function() {
 
     $scope.Nuevo.Cuantia = $scope.Nuevo.Deuda;
     $scope.Nuevo.Expediente.Cuantia = $scope.Nuevo.Deuda;
-    $scope.Nuevo.Persona.Sexo = $("#cmbSexo").val();
     $scope.Nuevo.Expediente.Identificacion = $scope.Nuevo.Persona.Identificacion;
     $scope.Nuevo.Expediente.Nombre = $scope.Nuevo.Persona.Nombres;
-
-    $scope.Nuevo.FechaPreinscripcion = datepicker.conversor(document.getElementById('inputFechaPreins').value);
-    
-    $scope.Nuevo.Expediente.FechaRadicacion = datepicker.conversor(document.getElementById('inputFechaRadi').value);
-
-    $scope.Nuevo.Persona.FechaNacimiento = datepicker.conversor(document.getElementById('inputNacimiento').value);
-
-    $scope.Nuevo.TipoObligacionId = $("#cmbTipoObligacion").val();
     
     var arrayValidate = [{id:"radioNatural",value:$scope.Nuevo.Persona.TipoPersonaId},
     {id:"inputidentificacion",value:$scope.Nuevo.Persona.Identificacion},
@@ -184,7 +196,6 @@ $scope.registar = function() {
     {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
 
     $scope.resp = Validaciones.nulos(arrayValidate);
-    
     if (!$scope.resp.status) {
         Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
     }else{
@@ -192,7 +203,7 @@ $scope.registar = function() {
         if (!$scope.resp.status) {
             Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
         }else{
-            $scope.resp = Validaciones.FechaLimite([arrayValidate[4],arrayValidate[13]]);
+            $scope.resp = Validaciones.FechaLimite([arrayValidate[4],arrayValidate[13],arrayValidate[18]]);
             if (!$scope.resp.status) {
                 Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
             }else{

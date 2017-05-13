@@ -1,5 +1,5 @@
 
-App.service("MiServicio", function ($http,$sessionStorage) {  
+App.service("MiServicio", function ($http,$sessionStorage, $rootScope) {  
 
 	this.get_Radicaciones = function() {
 		return [{"Tipo":"Cartera","Numero":"123456","Fecha":"20/11/2014","Periodo":"20/11/2014-20/02/2015","Valor":"5000000"},
@@ -35,7 +35,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
                 data: $.param(Datos),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                    'Authorization':'bearer '+$rootScope.session}
                 }).then(function(successCallback) {  
                 	console.log(successCallback); 
                     if (successCallback.data.url!=="undefined") {
@@ -87,7 +87,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 
 	};
         
-    this.ObtenerRolesByLider = function(callback) {
+    this.ObtenerRolesByLider = function(TokenSession, callback) {
 		
 		$http({
 			method: 'GET',
@@ -95,7 +95,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 			data: $.param(""),
 			headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                            'Authorization':'bearer '+$rootScope.session}
 		}).then(function(successCallback) {   
 			callback(successCallback.data);
 		}, function(errorCallback){
@@ -112,7 +112,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 			data: $.param(""),
 			headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                            'Authorization':'bearer '+$rootScope.session}
 		}).then(function(successCallback) {   
 			callback(successCallback.data);
 		}, function(errorCallback){
@@ -129,7 +129,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 			data: $.param(""),
 			headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                            'Authorization':'bearer '+$rootScope.session}
 		}).then(function(successCallback) {   
 			callback(successCallback.data);
 		}, function(errorCallback){
@@ -146,7 +146,7 @@ App.service("MiServicio", function ($http,$sessionStorage) {
 			data: $.param(""),
 			headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization':'bearer '+$sessionStorage.currentUser.token}
+                            'Authorization':'bearer '+$rootScope.session}
 		}).then(function(successCallback) {   
 			callback(successCallback.data);
 		}, function(errorCallback){

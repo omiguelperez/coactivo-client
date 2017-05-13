@@ -24,6 +24,13 @@
  App.run(function($rootScope, $http, $location, $sessionStorage) {
 
   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+
+    try{
+      $rootScope.session = $sessionStorage.currentUser.token;
+    }catch(e){
+      console.log(e.message);
+    }
+
     var publicPages = ['#!/login'];
     var restrictedPage = publicPages.indexOf(window.location.hash) === -1;
     if (restrictedPage && $sessionStorage.currentUser === undefined) {

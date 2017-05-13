@@ -42,7 +42,8 @@ function setupFakeBackend($httpBackend) {
         return [200, {filasAfectadas:1, mensaje:"Guardado Correctamente",error:false}, {}];
     });
 
-    $httpBackend.whenPOST('/api/createUser').respond(function (method, url, data) {
+    $httpBackend.whenPOST('/api/createUser').respond(function (method, url, data, headers) {
+        console.log(headers);
         return [200, {url:"1"}, {}];
     });
 
@@ -179,7 +180,7 @@ function setupFakeBackend($httpBackend) {
         return [200, json, {}];
     });
 
-    $httpBackend.whenGET('/api/GETroles/').respond(function (method, url, data) {
+    $httpBackend.whenGET('/api/GETroles/').respond(function (method, url, data,headers) {
         var json = [
             {name:"Secretaria"},
             {name:"Abogado"},
