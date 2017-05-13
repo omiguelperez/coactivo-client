@@ -11,7 +11,7 @@ describe('Pruebas unitarias para registro de expediente', function() {
         });
   });
 
- describe('Registro un dato de tipo incorrecto', function() {
+ // xdescribe('Registro un dato de tipo incorrecto', function() {
     it('ingresando datos', function() {
         $scope.Nuevo = {
           Cuantia:"10000", 
@@ -51,9 +51,9 @@ describe('Pruebas unitarias para registro de expediente', function() {
       $scope.registar();
       setTimeout(function() {expect($scope.resp.msg).toEqual('Tiene un campo Incorrecto');}, 2000);
     });
-  });
+  // });
 
-  describe('Registro fecha por encima de la actual', function() {
+  // xdescribe('Registro fecha por encima de la actual', function() {
     it('ingresando datos', function() {
         $scope.Nuevo = {
           Cuantia:"10000", 
@@ -93,9 +93,9 @@ describe('Pruebas unitarias para registro de expediente', function() {
       $scope.registar();
       setTimeout(function() {expect($scope.resp.msg).toEqual('Las fechas no puede ser mayores a la actual');}, 2000);
     });
-  });
+  // });
 
-  describe('Registro fecha nacimiento de menores de edad', function() {
+  // xdescribe('Registro fecha nacimiento de menores de edad', function() {
     it('ingresando datos', function() {
         $scope.Nuevo = {
           Cuantia:"10000", 
@@ -135,6 +135,6 @@ describe('Pruebas unitarias para registro de expediente', function() {
       $scope.registar();
       setTimeout(function() {expect($scope.resp.msg).toEqual('Solo se registran mayores de edad');}, 2000);
     });
-  });
+  // });
 
 });

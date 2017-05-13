@@ -36,7 +36,8 @@ App.service("MiServicio", function ($http,$sessionStorage) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization':'bearer '+$sessionStorage.currentUser.token}
-                }).then(function(successCallback) {   
+                }).then(function(successCallback) {  
+                	console.log(successCallback); 
                     if (successCallback.data.url!=="undefined") {
                         callback(!false,"Usuario Registrado Correctamente");
                     }else{

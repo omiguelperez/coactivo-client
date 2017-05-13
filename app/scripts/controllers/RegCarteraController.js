@@ -9,20 +9,6 @@
  */
  App.controller('RegCarteraController', function ($scope, $timeout, $location, MiServicio,datepicker,Validaciones, TemporalData,$sessionStorage) {
 
-
-  $('input.autocomplete').autocomplete({
-      data: {
-        "Colombia": null,
-        "Estados Unidos": null,
-        "España": null
-          //"España": 'http://placehold.it/250x250'
-      },
-        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function(val) {
-          // Callback function when value is autcompleted.
-      },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    });
 $('#cmbNacionalidad').change(function(){
         var pais=$.trim($("#cmbNacionalidad option:selected").text());
         $("#inputNac").val(pais);
@@ -197,18 +183,18 @@ $scope.registar = function() {
     {id:"inputFechaPreins",value:$scope.Nuevo.FechaPreinscripcion},
     {id:"inputTipoObliga",value:$scope.Nuevo.TipoObligacionId}];
 
-    var resp = Validaciones.nulos(arrayValidate);
+    $scope.resp = Validaciones.nulos(arrayValidate);
     
-    if (!resp.status) {
-        Mensaje(resp.msg,3000,'red rounded',resp.id);
+    if (!$scope.resp.status) {
+        Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
     }else{
-        resp = Validaciones.FechaNacimiento([arrayValidate[4]]);
-        if (!resp.status) {
-            Mensaje(resp.msg,3000,'red rounded',resp.id);
+        $scope.resp = Validaciones.FechaNacimiento([arrayValidate[4]]);
+        if (!$scope.resp.status) {
+            Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
         }else{
-            var resp = Validaciones.FechaLimite([arrayValidate[4],arrayValidate[13]]);
-            if (!resp.status) {
-                Mensaje(resp.msg,3000,'red rounded',resp.id);
+            $scope.resp = Validaciones.FechaLimite([arrayValidate[4],arrayValidate[13]]);
+            if (!$scope.resp.status) {
+                Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
             }else{
                 console.log($scope.Nuevo);
                 MiServicio.Registar($scope.Nuevo,function(resp_,msg) {

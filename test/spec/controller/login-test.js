@@ -79,7 +79,7 @@ xdescribe("Probando controlador login", function() {
 //Sebas test
 
 xdescribe('Pruebas unitarias para iniciar sesion', function() {
-    var $controller, $scope, $rootScope;
+    var $controller, $scope, $rootScope, $timeout;
 
   beforeEach(function() {
       module('desktopApp');
@@ -87,27 +87,54 @@ xdescribe('Pruebas unitarias para iniciar sesion', function() {
         inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
-            controller = $injector.get('$controller')("LoginController", {$scope: $scope});
+            $timeout = $injector.get('$timeout');
+            controller = $injector.get('$controller')("LoginController", {$scope: $scope,$timeout:$timeout});
         });
   });
 
   xdescribe('Ingreso en condiciones ideales al sistema', function() {
-    it('iniciar sesion v1', function() {
-      var x = function (argumete) {
-        console.log(argumete);
-      }
+    var originalTimeout;
+    beforeEach(function() {
+      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000;
+    });
 
-      $scope.username = 'Secretaria';
-      $scope.password = 'Secretaria';
-      $scope.login(x);
-      //$scope.login();
-      //console.log($scope.error);
-      setTimeout(function() {expect($scope.error).toEqual(false);}, 2000); 
+    xit('iniciar sesion v1', function() {
+       
+    });
+    
+    it("takes a long time", function(done) {
+      
+        $scope.username = 'Secretaria';
+        $scope.password = 'Secreta';
+        $scope.login();
+       
+        //$timeout.flush();
+
+        // this will throw an exception if there are any pending timeouts.
+        //$timeout.verifyNoPendingTasks();
+        $timeout(function() {
+          console.log($scope.error);
+        }, 2000);
+      // console.log('1:'+$scope.error);
+      // setTimeout(function() {
+      //   $scope.username = 'Secretaria';
+      //   $scope.password = 'Secretar';
+      //   $scope.login();
+      //   console.log('2:'+$scope.error);
+      //   //expect($scope.error).toEqual(false);
+      //   done();
+      // }, 1000);
+      // console.log('3:'+$scope.error);
+    });
+
+    afterEach(function() {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
   });
 
   xdescribe('Ingreso erroneo al sistema', function() {
-    it('iniciar sesion v2', function() {
+    xit('iniciar sesion v2', function() {
       $scope.username = 'Secretaria';
       $scope.password = 'Abogado';
       $scope.login();

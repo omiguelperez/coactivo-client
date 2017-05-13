@@ -42,6 +42,10 @@ function setupFakeBackend($httpBackend) {
         return [200, {filasAfectadas:1, mensaje:"Guardado Correctamente",error:false}, {}];
     });
 
+    $httpBackend.whenPOST('/api/createUser').respond(function (method, url, data) {
+        return [200, {url:"1"}, {}];
+    });
+
     $httpBackend.whenGET('/api/GETobligacionesTipos').respond(function (method, url, data) {
         var json = [
         {
@@ -168,6 +172,47 @@ function setupFakeBackend($httpBackend) {
         return [200, json, {}];
     });
 
+    $httpBackend.whenGET('/api/GETpaises').respond(function (method, url, data) {
+        var json = [
+            {paisId:"1",nombre:"Colombia"},
+        ];
+        return [200, json, {}];
+    });
+
+    $httpBackend.whenGET('/api/GETroles/').respond(function (method, url, data) {
+        var json = [
+            {name:"Secretaria"},
+            {name:"Abogado"},
+            {name:"Lider"},
+        ];
+        return [200, json, {}];
+    });
+
+    $httpBackend.whenRoute('GET','/api/GETDepartamentosById/:id').respond(function (method, url, data, headers, params) {
+        var json = [
+            {departamentoId:"1",nombre:"Cesar"},
+            {departamentoId:"2",nombre:"La Guajira"},
+        ];
+        return [200, json, {}];
+    });
+
+    $httpBackend.whenRoute('GET','/api/GETMunicipiosById/:id').respond(function (method, url, data, headers, params) {
+        if (params.id === "1") {
+            var json = [
+            {municipioId:"1",nombre:"Valledupar"},
+            {municipioId:"2",nombre:"Aguachica"},
+            {municipioId:"3",nombre:"Codazzi"},
+            ];
+        } else {
+            var json = [
+            {municipioId:"1",nombre:"Fonseca"},
+            {municipioId:"2",nombre:"Rioacha"},
+            {municipioId:"3",nombre:"Maicao"},
+            ];
+        }
+        
+        return [200, json, {}];
+    });
 
         // pass through any urls not handled above so static files are served correctly
         $httpBackend.whenGET(/^\w+.*/).passThrough();
