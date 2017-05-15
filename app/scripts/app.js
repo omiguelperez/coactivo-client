@@ -28,7 +28,7 @@
     try{
       $rootScope.session = $sessionStorage.currentUser.token;
     }catch(e){
-      console.log(e.message);
+      
     }
 
     var publicPages = ['#!/login'];

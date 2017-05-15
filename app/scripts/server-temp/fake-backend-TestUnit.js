@@ -1,6 +1,6 @@
 
 angular
-.module('serverApp',['desktopApp','ngMockE2E'])
+.module('serverApp-TestUnit',['ngMockE2E'])
 .run(setupFakeBackend);
 
 function setupFakeBackend($httpBackend) {
@@ -8,7 +8,7 @@ function setupFakeBackend($httpBackend) {
     var testUser2 = { username: 'Secretaria', password: 'Secretaria', firstName: 'Test', lastName: 'User' };
     var testUser3 = { username: 'Lider', password: 'Lider', firstName: 'Test', lastName: 'User' };
 
-    $httpBackend.whenPOST('/api').respond(function (method, url, data) {
+    $httpBackend.expect('POST','/api').respond(function(method, url, data){
         return api(method,url,data);
     });
 
@@ -192,25 +192,25 @@ function setupFakeBackend($httpBackend) {
         $httpBackend.whenGET(/^\w+.*/).passThrough();
     }
 
-    // function converter(argument) {
-    //     var params = {};
-    //     var vars = argument.split("&");
-    //     for (var i=0;i<vars.length;i++) {
-    //         var pair = vars[i].split("=");
-    //         pair[0] = decodeURIComponent(pair[0]);
-    //         pair[1] = decodeURIComponent(pair[1]);
-    //             // If first entry with this name
-    //             if (typeof params[pair[0]] === "undefined") {
-    //                 params[pair[0]] = pair[1];
-    //             // If second entry with this name
-    //         } else if (typeof params[pair[0]] === "string") {
-    //             var arr = [ params[pair[0]], pair[1] ];
-    //             params[pair[0]] = arr;
-    //                 // If third or later entry with this name
-    //             } else {
-    //                 params[pair[0]].push(pair[1]);
-    //             }
-    //         } 
+    function converter(argument) {
+        var params = {};
+        var vars = argument.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            pair[0] = decodeURIComponent(pair[0]);
+            pair[1] = decodeURIComponent(pair[1]);
+                // If first entry with this name
+                if (typeof params[pair[0]] === "undefined") {
+                    params[pair[0]] = pair[1];
+                // If second entry with this name
+            } else if (typeof params[pair[0]] === "string") {
+                var arr = [ params[pair[0]], pair[1] ];
+                params[pair[0]] = arr;
+                    // If third or later entry with this name
+                } else {
+                    params[pair[0]].push(pair[1]);
+                }
+            } 
 
-    //         return params;
-    //     }
+            return params;
+        }

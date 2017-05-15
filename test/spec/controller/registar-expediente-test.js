@@ -1,4 +1,4 @@
-describe('Pruebas unitarias para registro de expediente', function() {
+xdescribe('Pruebas unitarias para registro de expediente', function() {
   var $controller, $scope, $rootScope;
 
   beforeEach(function() {
