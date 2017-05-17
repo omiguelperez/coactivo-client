@@ -80,45 +80,64 @@ function iniController(){
     };
 }
 function ObtenerPaises() {
-    MiServicio.ObtenerPaises(function(datos) {
+    MiServicio.ObtenerPaises()
+    .then(function(successCallback) {  
+        var datos = successCallback.data;
         ObtenerDepartamentosPorPais(datos[0].paisId);
         $scope.Nuevo.Persona.Nacionalidad=datos[0].nombre;
         $scope.Nuevo.Persona.PaisCorrespondencia=datos[0].nombre;
         $scope.Nuevo.Persona.PaisNacimiento=datos[0].nombre;
         Materialize.updateTextFields();
-        $scope.listadoPaises = datos;
+        $scope.listadoPaises = datos; 
+    }, function(errorCallback){
+        // console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
 function ObtenerDepartamentosPorPais(IdPais) {
-    MiServicio.ObtenerDepartamentosByIdPais(IdPais,function(datos) {
+    MiServicio.ObtenerDepartamentosByIdPais(IdPais)
+    .then(function(successCallback) { 
+        var datos = successCallback.data;
         ObtenerMunicipiosPorDepartamento(datos[0].departamentoId);
         $scope.Nuevo.Persona.Departamento=datos[0].nombre;
         Materialize.updateTextFields();
-        $scope.listadoDepartamentos = datos;
+        $scope.listadoDepartamentos = datos;  
+    }, function(errorCallback){
+        // console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
 function ObtenerMunicipiosPorDepartamento(IdDepartamento) {
-    MiServicio.ObtenerMunicipiosByIdDepartamento(IdDepartamento,function(datos) {
+    MiServicio.ObtenerMunicipiosByIdDepartamento(IdDepartamento)
+    .then(function(successCallback) {
+        var datos = successCallback.data;
         $scope.Nuevo.Persona.MunicipioId=datos[0].municipioId;
         Materialize.updateTextFields();
-        $scope.listadoMunicipios = datos;
+        $scope.listadoMunicipios = datos; 
+    }, function(errorCallback){
+        // console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
 function ObternerObligaciones() {
-    MiServicio.ObtenerExpedientes(function(datos) {
-        $scope.listadoExpedientes = datos;
+    MiServicio.ObtenerExpedientes()
+    .then(function(successCallback) { 
+        $scope.listadoExpedientes = successCallback.data;  
+    }, function(errorCallback){
+
     });
 }
 
 function ObtenerTiposObligaciones() {
-    MiServicio.ObtenerTiposObligaciones(function(datos) {
-        $scope.listadoTiposObligaciones = datos;
+    MiServicio.ObtenerTiposObligaciones()
+    .then(function(successCallback) { 
+        $scope.Nuevo.TipoObligacionId = successCallback.data[0].tipoObligacionId;
+        $scope.listadoTiposObligaciones = successCallback.data;  
+    }, function(errorCallback){
+
     });  
     setTimeout(function() {$('select').material_select();}, 2000);
 }
@@ -208,12 +227,15 @@ $scope.registar = function() {
                 Mensaje($scope.resp.msg,3000,'red rounded',$scope.resp.id);
             }else{
                 console.log($scope.Nuevo);
-                MiServicio.Registar($scope.Nuevo,function(resp_,msg) {
-                    if (resp_) {
-                        Mensaje(msg,3000,'green rounded');
+                MiServicio.Registar($scope.Nuevo)
+                .then(function(successCallback) {   
+                    if (successCallback.data.filasAfectadas > 0 && !successCallback.data.error) {
+                        Mensaje(successCallback.data.mensaje,3000,'green rounded');
                         $location.path('/Secretaria/RegCartera');
-                    }else{
-                        Mensaje(msg,3000,'red rounded');
+                    }
+                }, function(errorCallback){
+                    if (errorCallback.status == 400) {
+                        Mensaje(errorCallback.data.message,3000,'red rounded');
                     }
                 });
             }

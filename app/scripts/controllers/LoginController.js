@@ -18,7 +18,7 @@
             $location.path("/"+$sessionStorage.currentUser.rolename);
         }
     };
-    var value;
+    
     $scope.login = function() {
         $scope.error = false;
         AuthenticationService.Login($scope.username, $scope.password)

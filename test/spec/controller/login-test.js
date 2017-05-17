@@ -2,7 +2,6 @@
 
 describe('Pruebas unitarias para iniciar sesion', function() {
   var $controller, $scope, $rootScope, AuthenticationService;
-  var originalTimeout;
 
   beforeEach(function() {
     module('desktopApp');
@@ -16,28 +15,46 @@ describe('Pruebas unitarias para iniciar sesion', function() {
       AuthenticationService = _AuthenticationService_;
     });
 
+    $httpBackend.expectPOST('/api').respond(function(method, url, data){
+        return api(method,url,data);
+    });
+
   });
+
+  // afterEach(function() {
+  //   $httpBackend.verifyNoOutstandingExpectation();
+  //   $httpBackend.verifyNoOutstandingRequest();
+  // });
 
   it("Acceso Ideal", function() {
 
+    
+    
     AuthenticationService.Login("Secretaria","Secretaria")
     .then(function(response){
+      
       console.log(response.status);
       expect(200).toEqual(response.status);
+
     });
 
+    $rootScope.$digest();
     $httpBackend.flush();
 
   });
 
   it("Acceso Errado", function() {
+
+    
     
     AuthenticationService.Login("Secretaria","Abogado")
     .catch(function(response){
+      
       console.log(response.status);
       expect(400).toEqual(response.status);
     });
 
+    $rootScope.$digest();
     $httpBackend.flush();
 
   });

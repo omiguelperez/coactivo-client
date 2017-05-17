@@ -74,39 +74,54 @@ function ReiniciarCampos(){
     };
 }
 function ObtenerRolesPorLiderAbogado() {
-    MiServicio.ObtenerRolesByLider($scope.session,function(datos) {
-        $scope.listadoRoles = datos;
+    MiServicio.ObtenerRolesByLider($scope.session)
+    .then(function(successCallback) { 
+        $scope.listadoRoles = successCallback.data;  
+    }, function(errorCallback){
+        console.log(errorCallback);
     });
     setTimeout(function() {$('select').material_select();}, 1500);
 }
 
 function ObtenerPaises() {
-    MiServicio.ObtenerPaises(function(datos) {
+    MiServicio.ObtenerPaises()
+    .then(function(successCallback) {  
+        var datos = successCallback.data;
         ObtenerDepartamentosPorPais(datos[0].paisId);
         $scope.Nuevo.Persona.Nacionalidad=datos[0].nombre;
         $scope.Nuevo.Persona.PaisCorrespondencia=datos[0].nombre;
         $scope.Nuevo.Persona.PaisNacimiento=datos[0].nombre;
         Materialize.updateTextFields();
-        $scope.listadoPaises = datos;
+        $scope.listadoPaises = datos; 
+    }, function(errorCallback){
+        console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
 function ObtenerDepartamentosPorPais(IdPais) {
-    MiServicio.ObtenerDepartamentosByIdPais(IdPais,function(datos) {
+    MiServicio.ObtenerDepartamentosByIdPais(IdPais)
+    .then(function(successCallback) { 
+        var datos = successCallback.data;
         ObtenerMunicipiosPorDepartamento(datos[0].departamentoId);
         $scope.Nuevo.Persona.Departamento=datos[0].nombre;
         Materialize.updateTextFields();
-        $scope.listadoDepartamentos = datos;
+        $scope.listadoDepartamentos = datos;  
+    }, function(errorCallback){
+        console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
 
 function ObtenerMunicipiosPorDepartamento(IdDepartamento) {
-    MiServicio.ObtenerMunicipiosByIdDepartamento(IdDepartamento,function(datos) {
+    MiServicio.ObtenerMunicipiosByIdDepartamento(IdDepartamento)
+    .then(function(successCallback) {
+        var datos = successCallback.data;
         $scope.Nuevo.Persona.MunicipioId=datos[0].municipioId;
         Materialize.updateTextFields();
-        $scope.listadoMunicipios = datos;
+        $scope.listadoMunicipios = datos; 
+    }, function(errorCallback){
+        console.log(errorCallback);
     });  
     setTimeout(function() {$('select').material_select();}, 500);
 }
@@ -172,13 +187,32 @@ $scope.clickRegistrarUsuario = function() {
                     Mensaje(resp.msg,3000,'red rounded',resp.id);
                 }else{
                     $("#Cargando").show();
-                    MiServicio.RegistrarUsuarioByLider($scope.Nuevo,function(resp_,msg) {
-                        $("#Cargando").hide();
-                        if (resp_) {
-                            Mensaje(msg,3000,'green rounded');
+                    MiServicio.RegistrarUsuarioByLider($scope.Nuevo)
+                    .then(function(successCallback) {
+                        $("#Cargando").hide();  
+                        console.log(successCallback); 
+                        if (successCallback.data.url!=="undefined") {
+                            Mensaje("Usuario Registrado Correctamente",3000,'green rounded');
                             ReiniciarCampos();
+                            // callback(!false,"Usuario Registrado Correctamente");
                         }else{
-                            Mensaje(msg,3000,'red rounded');
+                            Mensaje(successCallback.data.mensaje,3000,'red rounded');
+                            // callback(!successCallback.data.error,successCallback.data.mensaje);
+                        }
+                    }, function(errorCallback){
+                        $("#Cargando").hide();
+                        if (errorCallback.status == 400) {
+                            Mensaje(errorCallback.data.modelState[""][0],3000,'red rounded');
+                            // callback(false,errorCallback.data.modelState[""][0]);
+                        }else  if (errorCallback.status == 500) {
+                            Mensaje(errorCallback.data.message+" - "+errorCallback.data.exceptionMessage,3000,'red rounded');
+                            // callback(false,errorCallback.data.message+" - "+errorCallback.data.exceptionMessage);   
+                        }else  if (errorCallback.status == 401) {
+                            Mensaje(errorCallback.data.message,3000,'red rounded');
+                            // callback(false,errorCallback.data.message);   
+                        }else  if (errorCallback.status == 409) {
+                            Mensaje("La Persona Ya Existe, Por Favor Verifique",3000,'red rounded');
+                            // callback(false,"LA Persona Ya Existe, Por Favor Verifique");   
                         }
                     });
                 }
