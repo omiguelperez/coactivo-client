@@ -15,7 +15,7 @@ describe('Pruebas unitarias para iniciar sesion', function() {
       AuthenticationService = _AuthenticationService_;
     });
 
-    $httpBackend.expectPOST('/api').respond(function(method, url, data){
+   $httpBackend.expectPOST('/api').respond(function(method, url, data){
         return api(method,url,data);
     });
 
@@ -38,7 +38,7 @@ describe('Pruebas unitarias para iniciar sesion', function() {
 
     });
 
-    $rootScope.$digest();
+    // $rootScope.$digest();
     $httpBackend.flush();
 
   });
@@ -54,7 +54,7 @@ describe('Pruebas unitarias para iniciar sesion', function() {
       expect(400).toEqual(response.status);
     });
 
-    $rootScope.$digest();
+    // $rootScope.$digest();
     $httpBackend.flush();
 
   });

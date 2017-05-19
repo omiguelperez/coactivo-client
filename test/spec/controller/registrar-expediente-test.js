@@ -195,7 +195,7 @@ describe('Pruebas unitarias para registro de expediente', function() {
       expect("Guardado Correctamente").toEqual(successCallback.data.mensaje);
     });
     
-    $rootScope.$digest();
+    // $rootScope.$digest();
     $httpBackend.flush();
 
   });

@@ -1,4 +1,4 @@
-var dominio = "http://localhost:1876";
+var dominio = "https://coactivo.azurewebsites.net";
 
 var URL_APIS = {
 	AuthenticationService:{
