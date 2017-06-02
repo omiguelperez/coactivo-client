@@ -15,21 +15,15 @@ describe('Pruebas unitarias para iniciar sesion', function() {
       AuthenticationService = _AuthenticationService_;
     });
 
-   $httpBackend.expectPOST('/api').respond(function(method, url, data){
+   $httpBackend.expectPOST('https://coactivo.azurewebsites.net/oauth/token').respond(function(method, url, data){
         return api(method,url,data);
     });
 
   });
 
-  // afterEach(function() {
-  //   $httpBackend.verifyNoOutstandingExpectation();
-  //   $httpBackend.verifyNoOutstandingRequest();
-  // });
 
   it("Acceso Ideal", function() {
 
-    
-    
     AuthenticationService.Login("Secretaria","Secretaria")
     .then(function(response){
       
@@ -38,7 +32,6 @@ describe('Pruebas unitarias para iniciar sesion', function() {
 
     });
 
-    // $rootScope.$digest();
     $httpBackend.flush();
 
   });

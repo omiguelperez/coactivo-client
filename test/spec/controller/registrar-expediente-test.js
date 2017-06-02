@@ -13,7 +13,7 @@ describe('Pruebas unitarias para registro de expediente', function() {
       MiServicio = _MiServicio_;
     });
 
-    $httpBackend.expectPOST('/api_registrar').respond(function (method, url, data) {
+    $httpBackend.expectPOST('https://coactivo.azurewebsites.net/api/obligaciones').respond(function (method, url, data) {
         return api_registrar(method, url, data);
     });
   });
