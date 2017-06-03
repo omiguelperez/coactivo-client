@@ -38,19 +38,19 @@
 					<input type="text" name="pApellido" id="inputpApellido" ng-model="Nuevo.Persona.Apellidos" class="validate" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*">
 					<label for="inputpApellido" data-error="Sólo Letras" data-success="">Apellidos</label>
 				</div>
-				<div class="input-field col s4">
-					<select id="cmbSexo">
+				<div class="col s4">
+					<label for="cmbSexo">Sexo</label>
+					<select id="cmbSexo" class="browser-default">
 						<option selected="false" disabled="false">Seleccione una Opción</option>
 						<option value="M">Masculino</option>
 						<option value="F">Femenino</option>
 					</select>
-					<label for="cmbSexo">Sexo</label>
 				</div>
-				<div class="input-field col s3">
-                    <select id="cmbNacionalidad">
+				<div class="col s3">
+					<label for="cmbNacionalidad">Nacionalidad</label>
+                    <select id="cmbNacionalidad" class="browser-default">
                             <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
                     </select>
-                    <label for="cmbNacionalidad">Nacionalidad</label>
                 </div>
 			</fieldset>
 
@@ -59,27 +59,27 @@
 
 		<div class="row">
 			<fieldset> <legend> Fecha y Lugar de Nacimiento </legend>
-				<div class="input-field col s3">
-					<input class="datepicker" type="date" name="fechaNac" id="inputNacimiento" ng-model="Nuevo.Fecha_Nacimiento">
+				<div class="col s3">
 					<label for="inputNacimiento">Fecha de Nacimiento</label>
+					<input class="" type="date" name="fechaNac" id="inputNacimiento" ng-model="Nuevo.Fecha_Nacimiento">
 				</div>
-				<div class="input-field col s3">
-                    <select id="cmbPaisNacimiento">
+				<div class="col s3">
+					<label for="cmbPaisNacimiento">Pais Nacimiento</label>
+                    <select id="cmbPaisNacimiento" class="browser-default">
                             <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
                     </select>
-                    <label for="cmbPaisNacimiento">Pais Nacimiento</label>
                 </div>
-				<div class="input-field col s3">
-                    <select id="cmbDepartamento">
+				<div class="col s3">
+                    <label for="cmbDepartamento">Departamento</label>
+                    <select id="cmbDepartamento" class="browser-default">
                             <option ng-repeat="dato in listadoDepartamentos" value="{{dato.departamentoId}}">{{dato.nombre}}</option>
                     </select>
-                    <label for="cmbDepartamento">Departamento</label>
                 </div>
-				<div class="input-field col s3">
-                    <select id="cmbMunicipio">
+				<div class="col s3">
+                    <label for="cmbMunicipio">Municipio</label>
+                    <select id="cmbMunicipio" class="browser-default">
                             <option ng-repeat="dato in listadoMunicipios" value="{{dato.municipioId}}">{{dato.nombre}}</option>
                     </select>
-                    <label for="cmbMunicipio">Municipio</label>
                 </div>
 			</fieldset>
 			<div class="row"></div>
@@ -88,11 +88,11 @@
 					<input type="text" name="direccion" id="inputDireccion" ng-model="Nuevo.Persona.Direccion" class="validate">
 					<label for="inputDireccion">Direccion</label>
 				</div>
-				<div class="input-field col s3">
+				<div class="col s3">
+                    <label for="cmbPaisCorrespondencia">Pais Correspondencia</label>
                     <select id="cmbPaisCorrespondencia">
                             <option ng-repeat="dato in listadoPaises" value="{{dato.paisId}}">{{dato.nombre}}</option>
                     </select>
-                    <label for="cmbPaisCorrespondencia">Pais Correspondencia</label>
                 </div>
 				
 				<div class="input-field col s3">
@@ -128,9 +128,9 @@
 					<label for="inputEntEncar">Entidad Encargada</label>
 				</div>
 
-				<div class="input-field col s6">
-					<input type="date" name="municipio" id="inputFechaRadi" class="datepicker">
+				<div class="col s6">
 					<label for="inputFechaRadi">Fecha Radicación</label>
+					<input type="date" name="municipio" id="inputFechaRadi" class="">
 				</div>
 
 				<div class="input-field col s6">
@@ -167,13 +167,13 @@
 					<label for="inputFechaPreins">Fecha Preinscripción</label>
 				</div>
 
-				<div class="input-field col s6">
+				<div class="col s6">
 					<!-- <input type="number" name="municipio" id="inputTipoObliga" pattern="[0-9]*" ng-model="Nuevo.TipoObligacionId" class="validate">
 					<label for="inputTipoObliga">Tipo Obligación</label> -->
-					<select id="cmbTipoObligacion">
+					<label for="cmbTipoObligacion">Tipo de Obligaciones</label>
+					<select id="cmbTipoObligacion" class="browser-default">
 						<option ng-repeat="dato in listadoTiposObligaciones" value="{{dato.tipoObligacionId}}">{{dato.nombre}}</option>
 					</select>
-					<label for="cmbTipoObligacion">Tipo de Obligaciones</label>
 				</div>
 
 			</fieldset>
