@@ -222,12 +222,12 @@ $scope.clickRegistrarUsuario = function() {
 }
 
 function Mensaje(msg,time,style) {
-    Materialize.toast(msg, time, style);
+    Materialize.toast("<span id='msgRta'>"+msg+"</span>", time, style);
 }
 
 function Mensaje(msg,time,style,id) {
     $("#"+id).focus();
-    Materialize.toast(msg, time, style);
+    Materialize.toast("<span id='msgRta'>"+msg+"</span>", time, style);
 }
 
 
