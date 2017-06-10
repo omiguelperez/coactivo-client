@@ -98,14 +98,14 @@
     
 
             json_upload = {
-                uploadUrl: "http://localhost:1876/api/documentos/create", // server upload action
+                uploadUrl: "https://coactivo.azurewebsites.net/api/documentos/create", // server upload action
                 // uploadUrl: "http://localhost/html/server.php", // server upload action
                 uploadAsync: true,
                 maxFileCount: 1,
                 language: "es",
                  initialPreview: [],
-                //     "http://localhost:1876/api/documentos/1",
-                //     "http://localhost:1876/api/documentos/2"
+                //     "https://coactivo.azurewebsites.net/api/documentos/1",
+                //     "https://coactivo.azurewebsites.net/api/documentos/2"
                 // ],
                 initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
                 initialPreviewFileType: 'image', // image is the default and can be overridden in config below
@@ -159,7 +159,7 @@
            // });
             $.ajax({
                 type: 'get',
-                url:"http://localhost:1876/api/tiposdocumentos",
+                url:"https://coactivo.azurewebsites.net/api/tiposdocumentos",
                 // url:"http://localhost/html/serverDoc.php",
                 dataType:"json",
                 //data:{"fechaactual":"juab"},
@@ -178,7 +178,7 @@
             function ConsultarDocumentos(idexpediente){
                 $.ajax({
                     type: 'get',
-                    url:"http://localhost:1876/api/documentos/expediente/"+idexpediente,
+                    url:"https://coactivo.azurewebsites.net/api/documentos/expediente/"+idexpediente,
                     dataType:"json",
                     success: function(Respuesta){
                         if(Respuesta.length>0){
