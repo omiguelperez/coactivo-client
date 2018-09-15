@@ -25,3 +25,5 @@ npm-debug.log
 *.stackdump
 .tmp/
 /nbproject/
+dist/
+package-lock.json
